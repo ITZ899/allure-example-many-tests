@@ -32,6 +32,166 @@ public class IntegrationTest {
     @JiraIssues({@JiraIssue("INT-1")})
     @DisplayName("Payment gateway integration should work")
     public void shouldIntegrateWithPaymentGateway() {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        // Payment Integration Configuration (JSON)
+        String paymentConfig = "{\n" +
+                "  \"integrationId\": \"INT-T1\",\n" +
+                "  \"gateway\": \"Stripe\",\n" +
+                "  \"endpoint\": \"https://api.stripe.com/v1\",\n" +
+                "  \"apiKey\": \"sk_test_...\",\n" +
+                "  \"webhookUrl\": \"https://example.com/webhooks/stripe\",\n" +
+                "  \"timestamp\": \"" + timestamp + "\",\n" +
+                "  \"status\": \"active\"\n" +
+                "}";
+        
+        // Integration Dashboard (HTML)
+        String integrationDashboard = "<!DOCTYPE html>\n" +
+                "<html><head><title>Payment Integration Dashboard</title>\n" +
+                "<style>body{font-family:Arial,sans-serif;margin:20px;background:#f8f9fa;}\n" +
+                ".container{background:white;padding:20px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}\n" +
+                ".gateway{display:flex;justify-content:space-between;align-items:center;padding:15px;margin:10px 0;border-radius:4px;background:#e8f5e8;border-left:4px solid #4caf50;}\n" +
+                ".status{font-weight:bold;color:#2e7d32;}\n" +
+                ".metrics{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0;}\n" +
+                ".metric{background:#f5f5f5;padding:15px;border-radius:4px;text-align:center;}\n" +
+                "</style></head>\n" +
+                "<body><div class=\"container\">\n" +
+                "<h1>💳 Payment Integration Dashboard</h1>\n" +
+                "<div class=\"gateway\">\n" +
+                "<div><strong>Stripe Payment Gateway</strong><br/>API Version: v1</div>\n" +
+                "<div class=\"status\">✅ Connected</div>\n" +
+                "</div>\n" +
+                "<div class=\"metrics\">\n" +
+                "<div class=\"metric\"><h3>Success Rate</h3><p>99.8%</p></div>\n" +
+                "<div class=\"metric\"><h3>Avg Response Time</h3><p>150ms</p></div>\n" +
+                "<div class=\"metric\"><h3>Transactions Today</h3><p>1,247</p></div>\n" +
+                "<div class=\"metric\"><h3>Revenue Today</h3><p>$12,450</p></div>\n" +
+                "</div>\n" +
+                "<p><em>Last updated: " + timestamp + "</em></p>\n" +
+                "</div></body></html>";
+        
+        // Integration Metrics (CSV)
+        String integrationMetrics = "gateway,success_rate,avg_response_time,transactions,revenue,timestamp\n" +
+                "Stripe,99.8%,150ms,1247,$12450," + timestamp + "\n" +
+                "PayPal,99.5%,200ms,892,$8900," + timestamp + "\n" +
+                "Square,99.2%,180ms,456,$4560," + timestamp;
+        
+        // Integration Schema (XML)
+        String integrationSchema = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<integration-schema>\n" +
+                "  <payment-gateway name=\"Stripe\">\n" +
+                "    <endpoint>https://api.stripe.com/v1</endpoint>\n" +
+                "    <authentication type=\"api_key\">\n" +
+                "      <key>sk_test_...</key>\n" +
+                "    </authentication>\n" +
+                "    <webhooks>\n" +
+                "      <webhook url=\"https://example.com/webhooks/stripe\" events=\"payment.succeeded,payment.failed\"/>\n" +
+                "    </webhooks>\n" +
+                "    <timeout>30000</timeout>\n" +
+                "    <retries>3</retries>\n" +
+                "  </payment-gateway>\n" +
+                "</integration-schema>";
+        
+        // Integration Log (Plain Text)
+        String integrationLog = "PAYMENT INTEGRATION LOG\n" +
+                "======================\n\n" +
+                "Integration ID: INT-T1\n" +
+                "Gateway: Stripe\n" +
+                "Endpoint: https://api.stripe.com/v1\n" +
+                "Timestamp: " + timestamp + "\n" +
+                "Status: ✅ Active\n\n" +
+                "PERFORMANCE METRICS:\n" +
+                "-------------------\n" +
+                "Success Rate: 99.8%\n" +
+                "Average Response Time: 150ms\n" +
+                "Transactions Today: 1,247\n" +
+                "Revenue Today: $12,450\n\n" +
+                "RECENT ACTIVITY:\n" +
+                "---------------\n" +
+                "• Payment processed: $99.99 (Success)\n" +
+                "• Webhook received: payment.succeeded\n" +
+                "• API call completed: 145ms\n" +
+                "• Error rate: 0.2% (within acceptable limits)";
+        
+        // Integration JavaScript
+        String integrationJS = "// Payment Integration JavaScript\n" +
+                "class PaymentIntegration {\n" +
+                "    constructor(config) {\n" +
+                "        this.gateway = config.gateway;\n" +
+                "        this.endpoint = config.endpoint;\n" +
+                "        this.apiKey = config.apiKey;\n" +
+                "        this.metrics = {\n" +
+                "            successCount: 0,\n" +
+                "            failureCount: 0,\n" +
+                "            totalAmount: 0\n" +
+                "        };\n" +
+                "    }\n\n" +
+                "    async processPayment(amount, currency = 'USD') {\n" +
+                "        const startTime = Date.now();\n" +
+                "        \n" +
+                "        try {\n" +
+                "            const response = await fetch(this.endpoint + '/charges', {\n" +
+                "                method: 'POST',\n" +
+                "                headers: {\n" +
+                "                    'Authorization': 'Bearer ' + this.apiKey,\n" +
+                "                    'Content-Type': 'application/json'\n" +
+                "                },\n" +
+                "                body: JSON.stringify({\n" +
+                "                    amount: Math.round(amount * 100),\n" +
+                "                    currency: currency.toLowerCase()\n" +
+                "                })\n" +
+                "            });\n\n" +
+                "            const result = await response.json();\n" +
+                "            const duration = Date.now() - startTime;\n" +
+                "            \n" +
+                "            if (response.ok) {\n" +
+                "                this.metrics.successCount++;\n" +
+                "                this.metrics.totalAmount += amount;\n" +
+                "                \n" +
+                "                return {\n" +
+                "                    success: true,\n" +
+                "                    transactionId: result.id,\n" +
+                "                    amount: amount,\n" +
+                "                    currency: currency,\n" +
+                "                    duration: duration + 'ms'\n" +
+                "                };\n" +
+                "            } else {\n" +
+                "                throw new Error(result.error.message);\n" +
+                "            }\n" +
+                "        } catch (error) {\n" +
+                "            this.metrics.failureCount++;\n" +
+                "            return {\n" +
+                "                success: false,\n" +
+                "                error: error.message,\n" +
+                "                duration: (Date.now() - startTime) + 'ms'\n" +
+                "            };\n" +
+                "        }\n    }\n\n" +
+                "    getMetrics() {\n" +
+                "        const total = this.metrics.successCount + this.metrics.failureCount;\n" +
+                "        const successRate = total > 0 ? (this.metrics.successCount / total * 100).toFixed(1) + '%' : '0%';\n" +
+                "        \n" +
+                "        return {\n" +
+                "            ...this.metrics,\n" +
+                "            successRate,\n" +
+                "            totalTransactions: total\n" +
+                "        };\n    }\n}\n\n" +
+                "// Usage example\n" +
+                "const paymentIntegration = new PaymentIntegration({\n" +
+                "    gateway: 'Stripe',\n" +
+                "    endpoint: 'https://api.stripe.com/v1',\n" +
+                "    apiKey: 'sk_test_...'\n" +
+                "});\n\n" +
+                "paymentIntegration.processPayment(99.99, 'USD')\n" +
+                "    .then(result => console.log('Payment result:', result))\n" +
+                "    .catch(error => console.error('Payment error:', error));";
+        
+        Allure.attachment("Payment Configuration (JSON)", paymentConfig);
+        Allure.attachment("Integration Dashboard (HTML)", integrationDashboard);
+        Allure.attachment("Integration Metrics (CSV)", integrationMetrics);
+        Allure.attachment("Integration Schema (XML)", integrationSchema);
+        Allure.attachment("Integration Log (Text)", integrationLog);
+        Allure.attachment("Integration JavaScript", integrationJS);
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Payment Gateway Integration");
         steps.shouldSeeIssueWithTitle("Payment Gateway Integration");
@@ -45,6 +205,49 @@ public class IntegrationTest {
     @Tags({@Tag("web"), @Tag("integration"), @Tag("regression")})
     @JiraIssues({@JiraIssue("INT-2")})
     public void shouldIntegrateWithPaymentMethod(String paymentMethod) {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        // Payment Method Configuration (JSON)
+        String methodConfig = "{\n" +
+                "  \"methodId\": \"INT-T2\",\n" +
+                "  \"paymentMethod\": \"" + paymentMethod + "\",\n" +
+                "  \"provider\": \"" + paymentMethod + "\",\n" +
+                "  \"timestamp\": \"" + timestamp + "\",\n" +
+                "  \"status\": \"testing\"\n" +
+                "}";
+        
+        // Payment Method Report (HTML)
+        String methodReport = "<!DOCTYPE html>\n" +
+                "<html><head><title>Payment Method Integration Report</title></head>\n" +
+                "<body><h1>Payment Method Integration Report</h1>\n" +
+                "<p>Generated: " + timestamp + "</p>\n" +
+                "<h2>Method Details</h2>\n" +
+                "<ul>\n" +
+                "<li>Payment Method: " + paymentMethod + "</li>\n" +
+                "<li>Status: Testing</li>\n" +
+                "<li>Integration: Active</li>\n" +
+                "</ul>\n" +
+                "</body></html>";
+        
+        // Payment Method Data (CSV)
+        String methodData = "method_id,payment_method,provider,status,timestamp\n" +
+                "INT-T2," + paymentMethod + "," + paymentMethod + ",testing," + timestamp;
+        
+        // Payment Method Log (Plain Text)
+        String methodLog = "PAYMENT METHOD INTEGRATION LOG\n" +
+                "===============================\n\n" +
+                "Method ID: INT-T2\n" +
+                "Payment Method: " + paymentMethod + "\n" +
+                "Provider: " + paymentMethod + "\n" +
+                "Timestamp: " + timestamp + "\n" +
+                "Status: Testing\n" +
+                "Action: Integration test completed";
+        
+        Allure.attachment("Method Configuration (JSON)", methodConfig);
+        Allure.attachment("Method Report (HTML)", methodReport);
+        Allure.attachment("Method Data (CSV)", methodData);
+        Allure.attachment("Method Log (Text)", methodLog);
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Payment Method Integration: " + paymentMethod);
         steps.shouldSeeIssueWithTitle("Payment Method Integration: " + paymentMethod);
