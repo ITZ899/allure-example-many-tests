@@ -1,7 +1,6 @@
 package io.qameta.allure;
 
 import io.qameta.allure.junit5.AllureJunit5;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import io.qameta.allure.*;
@@ -14,128 +13,132 @@ import java.time.format.DateTimeFormatter;
 @ExtendWith(AllureJunit5.class)
 @Layer("rest")
 @Owner("integration-specialist")
-@Feature("API Integration")
-@TM4J("TM4J-129")
+@Feature("Integration API")
+@TM4J("TM4J-130")
 @Microservice("integration-service")
-@Story("API integration functionality")
+@Story("Integration API functionality")
 @Tag("integration") @Tag("api") @Tag("rest")
 public class IntegrationApiTest {
 
-    private RestSteps steps;
+    private RestSteps steps = new RestSteps();
 
-    @BeforeEach
-    void startDriver() {
-        steps = new RestSteps();
+    @Test
+    @DisplayName("Test third-party API integration")
+    @Story("API integration")
+    @JiraIssues({@JiraIssue("JIRA-463")})
+    public void shouldTestThirdPartyApiIntegration() {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        // API Configuration (JSON)
+        String apiConfig = "{\n" +
+                "  \"integrations\": [\n" +
+                "    {\n" +
+                "      \"name\": \"Payment Gateway\",\n" +
+                "      \"type\": \"payment\",\n" +
+                "      \"endpoint\": \"https://api.payment.com/v1\",\n" +
+                "      \"auth\": \"bearer\",\n" +
+                "      \"timeout\": 30000\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"name\": \"Shipping Provider\",\n" +
+                "      \"type\": \"shipping\",\n" +
+                "      \"endpoint\": \"https://api.shipping.com/v2\",\n" +
+                "      \"auth\": \"api_key\",\n" +
+                "      \"timeout\": 15000\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+        
+        // Integration Status Dashboard (HTML)
+        String statusDashboard = "<!DOCTYPE html>\n" +
+                "<html><head><title>Integration Status Dashboard</title></head>\n" +
+                "<body><h1>Integration Status Dashboard</h1>\n" +
+                "<p>Last updated: " + timestamp + "</p>\n" +
+                "<ul>\n" +
+                "<li>Payment Gateway: ✅ Online</li>\n" +
+                "<li>Shipping Provider: ✅ Online</li>\n" +
+                "<li>Email Service: ✅ Online</li>\n" +
+                "</ul>\n" +
+                "</body></html>";
+        
+        // API Response Times (CSV)
+        String responseTimes = "service,endpoint,avg_response_time,success_rate,last_check\n" +
+                "Payment Gateway,api.payment.com,250ms,99.8%," + timestamp + "\n" +
+                "Shipping Provider,api.shipping.com,180ms,99.9%," + timestamp + "\n" +
+                "Email Service,api.email.com,95ms,99.7%," + timestamp;
+        
+        // Integration Schema (XML)
+        String integrationSchema = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<integration-schema>\n" +
+                "  <service name=\"Payment Gateway\" type=\"payment\">\n" +
+                "    <endpoint>https://api.payment.com/v1</endpoint>\n" +
+                "    <timeout>30000</timeout>\n" +
+                "  </service>\n" +
+                "</integration-schema>";
+        
+        // Integration Test Report (Plain Text)
+        String testReport = "INTEGRATION API TEST REPORT\n" +
+                "============================\n\n" +
+                "Test Date: " + timestamp + "\n" +
+                "Status: ✅ PASSED\n\n" +
+                "SERVICES:\n" +
+                "1. Payment Gateway - ✅ Online\n" +
+                "2. Shipping Provider - ✅ Online\n" +
+                "3. Email Service - ✅ Online\n\n" +
+                "Overall Success Rate: 99.8%";
+        
+        // Integration JavaScript
+        String integrationJS = "class IntegrationManager {\n" +
+                "  constructor(config) {\n" +
+                "    this.integrations = config.integrations;\n" +
+                "  }\n\n" +
+                "  async checkStatus(integrationName) {\n" +
+                "    const integration = this.integrations.find(i => i.name === integrationName);\n" +
+                "    return { online: true, responseTime: '250ms' };\n" +
+                "  }\n" +
+                "}";
+        
+        Allure.attachment("API Configuration (JSON)", apiConfig);
+        Allure.attachment("Status Dashboard (HTML)", statusDashboard);
+        Allure.attachment("Response Times (CSV)", responseTimes);
+        Allure.attachment("Integration Schema (XML)", integrationSchema);
+        Allure.attachment("Test Report (Text)", testReport);
+        Allure.attachment("Integration JavaScript", integrationJS);
+        
+        steps.createIssueWithTitle("testuser", "testrepo", "Integration API Test");
+        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Integration API Test");
     }
 
     @Test
-    @DisplayName("Test payment gateway integration")
-    @Story("Payment integration")
-    @JiraIssues({@JiraIssue("JIRA-462")})
-    public void shouldTestPaymentGatewayIntegration() {
+    @DisplayName("Test API data synchronization")
+    @Story("Data synchronization")
+    public void shouldTestApiDataSynchronization() {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         
-        String paymentConfig = "{\n" +
-                "  \"gateway\": \"Stripe\",\n" +
-                "  \"version\": \"2023-10-16\",\n" +
-                "  \"endpoint\": \"https://api.stripe.com/v1/payments\",\n" +
-                "  \"authentication\": \"Bearer token\",\n" +
-                "  \"timeout\": 30000,\n" +
-                "  \"retryCount\": 3\n" +
+        String syncConfig = "{\n" +
+                "  \"syncJobs\": [\n" +
+                "    {\"id\": \"user-sync\", \"status\": \"success\"},\n" +
+                "    {\"id\": \"order-sync\", \"status\": \"success\"}\n" +
+                "  ]\n" +
                 "}";
         
-        String paymentData = "Amount: $100.00\n" +
-                "Currency: USD\n" +
-                "Method: Credit Card\n" +
-                "Card: **** 1234\n" +
-                "Status: Processing\n" +
-                "Transaction ID: txn_123456789";
+        String syncReport = "<!DOCTYPE html>\n" +
+                "<html><head><title>Data Sync Status</title></head>\n" +
+                "<body><h1>Data Sync Status</h1>\n" +
+                "<p>Last updated: " + timestamp + "</p>\n" +
+                "<ul><li>User Sync: ✅ Success</li><li>Order Sync: ✅ Success</li></ul>\n" +
+                "</body></html>";
         
-        String result = "Payment gateway integration tested successfully at " + timestamp + "\n" +
-                "Status: Connected\n" +
-                "Response Time: 250ms\n" +
-                "Success Rate: 99.8%\n" +
-                "Error Rate: 0.2%";
+        String syncMetrics = "job_id,records_synced,success_rate,last_sync\n" +
+                "user-sync,1250,99.8%," + timestamp + "\n" +
+                "order-sync,89,100%," + timestamp;
         
-        Allure.attachment("Payment Configuration", paymentConfig);
-        Allure.attachment("Payment Data", paymentData);
-        Allure.attachment("Integration Result", result);
+        Allure.attachment("Sync Configuration (JSON)", syncConfig);
+        Allure.attachment("Sync Report (HTML)", syncReport);
+        Allure.attachment("Sync Metrics (CSV)", syncMetrics);
+        Allure.attachment("Sync Timestamp", timestamp);
         
-        steps.createIssueWithTitle("testuser", "testrepo", "Payment Gateway Integration: Stripe");
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Payment Gateway Integration: Stripe");
-    }
-
-    @Test
-    @DisplayName("Test inventory system integration")
-    @Story("Inventory integration")
-    public void shouldTestInventorySystemIntegration() {
-        String system = "Xero";
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        
-        String inventoryConfig = "{\n" +
-                "  \"system\": \"" + system + "\",\n" +
-                "  \"apiVersion\": \"v2.0\",\n" +
-                "  \"endpoint\": \"https://api.xero.com/inventory\",\n" +
-                "  \"authentication\": \"OAuth 2.0\",\n" +
-                "  \"syncFrequency\": \"5 minutes\",\n" +
-                "  \"batchSize\": 100\n" +
-                "}";
-        
-        String inventoryData = "System: " + system + "\n" +
-                "Products: 1,250\n" +
-                "Stock Levels: Real-time\n" +
-                "Last Sync: " + LocalDateTime.now().minusMinutes(2).format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "\n" +
-                "Status: Synchronized\n" +
-                "Error Count: 0";
-        
-        String result = "Inventory system '" + system + "' integrated successfully at " + timestamp + "\n" +
-                "Status: Active\n" +
-                "Sync Status: Up to date\n" +
-                "Data Accuracy: 99.9%\n" +
-                "Performance: Excellent";
-        
-        Allure.attachment("Inventory Configuration", inventoryConfig);
-        Allure.attachment("Inventory Data", inventoryData);
-        Allure.attachment("Integration Result", result);
-        
-        steps.createIssueWithTitle("testuser", "testrepo", "Inventory System Integration: " + system);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Inventory System Integration: " + system);
-    }
-
-    @Test
-    @DisplayName("Test shipping provider integration")
-    @Story("Shipping integration")
-    public void shouldTestShippingProviderIntegration() {
-        String provider = "Royal Mail";
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        
-        String shippingConfig = "{\n" +
-                "  \"provider\": \"" + provider + "\",\n" +
-                "  \"apiVersion\": \"v1.2\",\n" +
-                "  \"endpoint\": \"https://api.royalmail.com/shipping\",\n" +
-                "  \"authentication\": \"API Key\",\n" +
-                "  \"rateLimit\": \"1000/hour\",\n" +
-                "  \"timeout\": 15000\n" +
-                "}";
-        
-        String shippingData = "Provider: " + provider + "\n" +
-                "Service: Tracked 24\n" +
-                "Delivery Time: 1-2 business days\n" +
-                "Coverage: UK & International\n" +
-                "Tracking: Available\n" +
-                "Insurance: Up to £500";
-        
-        String result = "Shipping provider '" + provider + "' integrated successfully at " + timestamp + "\n" +
-                "Status: Connected\n" +
-                "Service Level: Premium\n" +
-                "Reliability: 99.5%\n" +
-                "Customer Satisfaction: High";
-        
-        Allure.attachment("Shipping Configuration", shippingConfig);
-        Allure.attachment("Shipping Data", shippingData);
-        Allure.attachment("Integration Result", result);
-        
-        steps.createIssueWithTitle("testuser", "testrepo", "Shipping Provider Integration: " + provider);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Shipping Provider Integration: " + provider);
+        steps.createIssueWithTitle("testuser", "testrepo", "API Data Sync Test");
+        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "API Data Sync Test");
     }
 }

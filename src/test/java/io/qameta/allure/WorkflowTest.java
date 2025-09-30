@@ -15,9 +15,9 @@ import java.time.format.DateTimeFormatter;
 @Layer("web")
 @Owner("workflow-specialist")
 @Feature("Workflow Management")
-@TM4J("TM4J-128")
+@TM4J("TM4J-129")
 @Microservice("workflow-service")
-@Story("Workflow management functionality")
+@Story("Workflow functionality")
 @Tag("workflow") @Tag("process") @Tag("web")
 public class WorkflowTest {
 
@@ -29,193 +29,227 @@ public class WorkflowTest {
     }
 
     @Test
-    @DisplayName("Create new workflow")
+    @DisplayName("Test workflow creation")
     @Story("Workflow creation")
-    @JiraIssues({@JiraIssue("JIRA-461")})
-    public void shouldCreateNewWorkflow() {
+    @JiraIssues({@JiraIssue("JIRA-462")})
+    public void shouldTestWorkflowCreation() {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         
-        String workflowConfig = "{\n" +
-                "  \"workflow\": {\n" +
-                "    \"name\": \"Order Processing Workflow\",\n" +
-                "    \"version\": \"1.0.0\",\n" +
-                "    \"description\": \"Automated order processing workflow\",\n" +
-                "    \"steps\": [\n" +
-                "      {\"id\": 1, \"name\": \"Validate Order\", \"type\": \"validation\"},\n" +
-                "      {\"id\": 2, \"name\": \"Check Inventory\", \"type\": \"inventory\"},\n" +
-                "      {\"id\": 3, \"name\": \"Process Payment\", \"type\": \"payment\"},\n" +
-                "      {\"id\": 4, \"name\": \"Ship Order\", \"type\": \"shipping\"}\n" +
-                "    ]\n" +
-                "  }\n" +
+        // Workflow Definition (JSON)
+        String workflowDef = "{\n" +
+                "  \"workflowId\": \"wf-001\",\n" +
+                "  \"name\": \"Order Processing Workflow\",\n" +
+                "  \"version\": \"1.0.0\",\n" +
+                "  \"steps\": [\n" +
+                "    {\"id\": \"validate\", \"name\": \"Validate Order\", \"type\": \"validation\"},\n" +
+                "    {\"id\": \"payment\", \"name\": \"Process Payment\", \"type\": \"payment\"},\n" +
+                "    {\"id\": \"inventory\", \"name\": \"Check Inventory\", \"type\": \"inventory\"},\n" +
+                "    {\"id\": \"shipping\", \"name\": \"Prepare Shipping\", \"type\": \"shipping\"}\n" +
+                "  ],\n" +
+                "  \"conditions\": [\n" +
+                "    {\"from\": \"validate\", \"to\": \"payment\", \"condition\": \"valid\"},\n" +
+                "    {\"from\": \"payment\", \"to\": \"inventory\", \"condition\": \"success\"},\n" +
+                "    {\"from\": \"inventory\", \"to\": \"shipping\", \"condition\": \"available\"}\n" +
+                "  ]\n" +
                 "}";
         
-        String metrics = "Workflow: Order Processing\n" +
-                "Steps: 4\n" +
-                "Estimated Duration: 15 minutes\n" +
-                "Success Rate: 95.2%\n" +
-                "Average Processing Time: 12.5 minutes\n" +
-                "Error Rate: 4.8%";
+        // Workflow Diagram (HTML)
+        String workflowDiagram = "<!DOCTYPE html>\n" +
+                "<html><head><title>Workflow Diagram</title>\n" +
+                "<style>body{font-family:Arial,sans-serif;margin:20px;background:#f8f9fa;}\n" +
+                ".container{background:white;padding:20px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}\n" +
+                ".workflow{display:flex;align-items:center;justify-content:space-between;margin:20px 0;}\n" +
+                ".step{background:#e3f2fd;padding:15px;border-radius:8px;text-align:center;min-width:120px;}\n" +
+                ".arrow{font-size:24px;color:#1976d2;margin:0 10px;}\n" +
+                ".status{color:#4caf50;font-weight:bold;}</style></head>\n" +
+                "<body><div class=\"container\">\n" +
+                "<h1>🔄 Order Processing Workflow</h1>\n" +
+                "<div class=\"workflow\">\n" +
+                "<div class=\"step\"><strong>Validate Order</strong><br/>Status: ✅</div>\n" +
+                "<div class=\"arrow\">→</div>\n" +
+                "<div class=\"step\"><strong>Process Payment</strong><br/>Status: ✅</div>\n" +
+                "<div class=\"arrow\">→</div>\n" +
+                "<div class=\"step\"><strong>Check Inventory</strong><br/>Status: ✅</div>\n" +
+                "<div class=\"arrow\">→</div>\n" +
+                "<div class=\"step\"><strong>Prepare Shipping</strong><br/>Status: ✅</div>\n" +
+                "</div>\n" +
+                "<p><em>Generated at: " + timestamp + "</em></p>\n" +
+                "</div></body></html>";
         
-        String result = "Workflow created successfully at " + timestamp + "\n" +
-                "Status: Active\n" +
-                "ID: WF-001\n" +
+        // Workflow Execution Log (CSV)
+        String executionLog = "timestamp,step,status,duration,message\n" +
+                timestamp + ",validate,success,150ms,Order validation passed\n" +
+                timestamp + ",payment,success,300ms,Payment processed successfully\n" +
+                timestamp + ",inventory,success,200ms,Inventory check completed\n" +
+                timestamp + ",shipping,success,250ms,Shipping prepared\n" +
+                timestamp + ",workflow,completed,900ms,Workflow execution finished";
+        
+        // Workflow Schema (XML)
+        String workflowSchema = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<workflow-schema>\n" +
+                "  <workflow id=\"wf-001\">\n" +
+                "    <name>Order Processing Workflow</name>\n" +
+                "    <version>1.0.0</version>\n" +
+                "    <steps>\n" +
+                "      <step id=\"validate\" type=\"validation\">\n" +
+                "        <name>Validate Order</name>\n" +
+                "        <timeout>30s</timeout>\n" +
+                "      </step>\n" +
+                "      <step id=\"payment\" type=\"payment\">\n" +
+                "        <name>Process Payment</name>\n" +
+                "        <timeout>60s</timeout>\n" +
+                "      </step>\n" +
+                "    </steps>\n" +
+                "    <transitions>\n" +
+                "      <transition from=\"validate\" to=\"payment\" condition=\"valid\"/>\n" +
+                "      <transition from=\"payment\" to=\"inventory\" condition=\"success\"/>\n" +
+                "    </transitions>\n" +
+                "  </workflow>\n" +
+                "</workflow-schema>";
+        
+        // Workflow Status Report (Plain Text)
+        String statusReport = "WORKFLOW EXECUTION REPORT\n" +
+                "==========================\n\n" +
+                "Workflow: Order Processing Workflow\n" +
+                "ID: wf-001\n" +
                 "Version: 1.0.0\n" +
-                "Next Review: " + LocalDateTime.now().plusDays(30).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                "Started: " + timestamp + "\n" +
+                "Status: ✅ COMPLETED\n\n" +
+                "EXECUTION SUMMARY:\n" +
+                "------------------\n" +
+                "Total Steps: 4\n" +
+                "Completed: 4\n" +
+                "Failed: 0\n" +
+                "Skipped: 0\n" +
+                "Total Duration: 900ms\n\n" +
+                "STEP DETAILS:\n" +
+                "1. Validate Order - ✅ Success (150ms)\n" +
+                "2. Process Payment - ✅ Success (300ms)\n" +
+                "3. Check Inventory - ✅ Success (200ms)\n" +
+                "4. Prepare Shipping - ✅ Success (250ms)\n\n" +
+                "PERFORMANCE METRICS:\n" +
+                "Average Step Duration: 225ms\n" +
+                "Fastest Step: Validate Order (150ms)\n" +
+                "Slowest Step: Process Payment (300ms)\n" +
+                "Success Rate: 100%";
         
-        Allure.attachment("Workflow Configuration", workflowConfig);
-        Allure.attachment("Workflow Metrics", metrics);
-        Allure.attachment("Creation Result", result);
+        // Workflow JavaScript
+        String workflowJS = "// Workflow Management JavaScript\n" +
+                "class WorkflowManager {\n" +
+                "    constructor(workflowDef) {\n" +
+                "        this.workflow = workflowDef;\n" +
+                "        this.currentStep = null;\n" +
+                "        this.executionLog = [];\n" +
+                "        this.status = 'idle';\n" +
+                "    }\n\n" +
+                "    async executeWorkflow(data) {\n" +
+                "        this.status = 'running';\n" +
+                "        this.executionLog = [];\n" +
+                "        \n" +
+                "        try {\n" +
+                "            for (const step of this.workflow.steps) {\n" +
+                "                this.currentStep = step.id;\n" +
+                "                const result = await this.executeStep(step, data);\n" +
+                "                this.logStep(step.id, result);\n" +
+                "                \n" +
+                "                if (!result.success) {\n" +
+                "                    this.status = 'failed';\n" +
+                "                    return result;\n" +
+                "                }\n" +
+                "            }\n" +
+                "            \n" +
+                "            this.status = 'completed';\n" +
+                "            return { success: true, message: 'Workflow completed successfully' };\n" +
+                "        } catch (error) {\n" +
+                "            this.status = 'error';\n" +
+                "            return { success: false, error: error.message };\n" +
+                "        }\n" +
+                "    }\n\n" +
+                "    async executeStep(step, data) {\n" +
+                "        const startTime = Date.now();\n" +
+                "        \n" +
+                "        // Simulate step execution\n" +
+                "        await new Promise(resolve => setTimeout(resolve, Math.random() * 300 + 100));\n" +
+                "        \n" +
+                "        const duration = Date.now() - startTime;\n" +
+                "        return {\n" +
+                "            success: true,\n" +
+                "            duration: duration + 'ms',\n" +
+                "            message: `${step.name} completed successfully`\n" +
+                "        };\n" +
+                "    }\n\n" +
+                "    logStep(stepId, result) {\n" +
+                "        this.executionLog.push({\n" +
+                "            step: stepId,\n" +
+                "            timestamp: new Date().toISOString(),\n" +
+                "            status: result.success ? 'success' : 'failed',\n" +
+                "            duration: result.duration,\n" +
+                "            message: result.message\n" +
+                "        });\n" +
+                "    }\n\n" +
+                "    getExecutionSummary() {\n" +
+                "        const total = this.executionLog.length;\n" +
+                "        const successful = this.executionLog.filter(log => log.status === 'success').length;\n" +
+                "        const failed = total - successful;\n" +
+                "        \n" +
+                "        return {\n" +
+                "            total,\n" +
+                "            successful,\n" +
+                "            failed,\n" +
+                "            successRate: total > 0 ? (successful / total * 100).toFixed(1) + '%' : '0%',\n" +
+                "            status: this.status\n" +
+                "        };\n" +
+                "    }\n" +
+                "}\n\n" +
+                "// Usage example\n" +
+                "const workflowManager = new WorkflowManager(workflowDefinition);\n" +
+                "workflowManager.executeWorkflow(orderData)\n" +
+                "    .then(result => console.log('Workflow result:', result))\n" +
+                "    .catch(error => console.error('Workflow error:', error));";
+        
+        Allure.attachment("Workflow Definition (JSON)", workflowDef);
+        Allure.attachment("Workflow Diagram (HTML)", workflowDiagram);
+        Allure.attachment("Execution Log (CSV)", executionLog);
+        Allure.attachment("Workflow Schema (XML)", workflowSchema);
+        Allure.attachment("Status Report (Text)", statusReport);
+        Allure.attachment("Workflow JavaScript", workflowJS);
         
         steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("Workflow: Order Processing");
-        steps.shouldSeeIssueWithTitle("Workflow: Order Processing");
+        steps.createIssueWithTitle("Workflow Creation Test");
+        steps.shouldSeeIssueWithTitle("Workflow Creation Test");
     }
 
     @Test
-    @DisplayName("Execute workflow step")
+    @DisplayName("Test workflow execution")
     @Story("Workflow execution")
-    public void shouldExecuteWorkflowStep() {
-        String stepName = "Validate Order";
+    public void shouldTestWorkflowExecution() {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         
-        String stepConfig = "{\n" +
-                "  \"step\": {\n" +
-                "    \"id\": 1,\n" +
-                "    \"name\": \"" + stepName + "\",\n" +
-                "    \"type\": \"validation\",\n" +
-                "    \"timeout\": 300,\n" +
-                "    \"retryCount\": 3,\n" +
-                "    \"dependencies\": []\n" +
-                "  }\n" +
-                "}";
+        // Execution Metrics (CSV)
+        String executionMetrics = "workflow_id,execution_time,steps_completed,success_rate,avg_step_duration\n" +
+                "wf-001,900ms,4,100%,225ms\n" +
+                "wf-002,1200ms,6,100%,200ms\n" +
+                "wf-003,750ms,3,100%,250ms";
         
-        String executionData = "Step: " + stepName + "\n" +
-                "Type: Validation\n" +
-                "Timeout: 300 seconds\n" +
-                "Retry Count: 3\n" +
-                "Dependencies: None\n" +
-                "Status: Running";
+        // Performance Report (HTML)
+        String performanceReport = "<!DOCTYPE html>\n" +
+                "<html><head><title>Workflow Performance Report</title></head>\n" +
+                "<body><h1>Workflow Performance Report</h1>\n" +
+                "<p>Generated: " + timestamp + "</p>\n" +
+                "<h2>Execution Statistics</h2>\n" +
+                "<ul>\n" +
+                "<li>Total Workflows: 3</li>\n" +
+                "<li>Success Rate: 100%</li>\n" +
+                "<li>Average Execution Time: 950ms</li>\n" +
+                "</ul>\n" +
+                "</body></html>";
         
-        String result = "Step executed successfully at " + timestamp + "\n" +
-                "Status: Completed\n" +
-                "Duration: 45 seconds\n" +
-                "Retries: 0\n" +
-                "Next Step: Check Inventory";
-        
-        Allure.attachment("Step Configuration", stepConfig);
-        Allure.attachment("Execution Data", executionData);
-        Allure.attachment("Execution Result", result);
+        Allure.attachment("Execution Metrics (CSV)", executionMetrics);
+        Allure.attachment("Performance Report (HTML)", performanceReport);
+        Allure.attachment("Execution Timestamp", timestamp);
         
         steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("Workflow Step: " + stepName);
-        steps.shouldSeeIssueWithTitle("Workflow Step: " + stepName);
-    }
-
-    @Test
-    @DisplayName("Test workflow patterns")
-    @Story("Workflow patterns")
-    public void shouldTestWorkflowPatterns() {
-        String pattern = "Sequential";
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        
-        String patternConfig = "{\n" +
-                "  \"pattern\": \"" + pattern + "\",\n" +
-                "  \"description\": \"Steps execute one after another\",\n" +
-                "  \"executionOrder\": \"linear\",\n" +
-                "  \"parallelExecution\": false,\n" +
-                "  \"errorHandling\": \"stop-on-error\"\n" +
-                "}";
-        
-        String patternAnalysis = "Pattern: " + pattern + "\n" +
-                "Execution: Linear\n" +
-                "Parallel: No\n" +
-                "Error Handling: Stop on error\n" +
-                "Use Case: Order processing\n" +
-                "Complexity: Low";
-        
-        String result = "Workflow pattern '" + pattern + "' tested successfully at " + timestamp + "\n" +
-                "Status: Valid\n" +
-                "Performance: Good\n" +
-                "Reliability: High";
-        
-        Allure.attachment("Pattern Configuration", patternConfig);
-        Allure.attachment("Pattern Analysis", patternAnalysis);
-        Allure.attachment("Pattern Result", result);
-        
-        steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("Workflow Pattern: " + pattern);
-        steps.shouldSeeIssueWithTitle("Workflow Pattern: " + pattern);
-    }
-
-    @Test
-    @DisplayName("Test workflow stages")
-    @Story("Workflow stages")
-    public void shouldTestWorkflowStages() {
-        String stage = "Processing";
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        
-        String stageConfig = "{\n" +
-                "  \"stage\": \"" + stage + "\",\n" +
-                "  \"status\": \"active\",\n" +
-                "  \"steps\": [\"Validate Order\", \"Check Inventory\", \"Process Payment\"],\n" +
-                "  \"estimatedDuration\": \"10 minutes\",\n" +
-                "  \"successRate\": \"95.2%\"\n" +
-                "}";
-        
-        String stageMetrics = "Stage: " + stage + "\n" +
-                "Status: Active\n" +
-                "Steps: 3\n" +
-                "Duration: 10 minutes\n" +
-                "Success Rate: 95.2%\n" +
-                "Error Rate: 4.8%";
-        
-        String result = "Workflow stage '" + stage + "' processed successfully at " + timestamp + "\n" +
-                "Status: Completed\n" +
-                "Duration: 8.5 minutes\n" +
-                "Next Stage: Shipping";
-        
-        Allure.attachment("Stage Configuration", stageConfig);
-        Allure.attachment("Stage Metrics", stageMetrics);
-        Allure.attachment("Stage Result", result);
-        
-        steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("Workflow Stage: " + stage);
-        steps.shouldSeeIssueWithTitle("Workflow Stage: " + stage);
-    }
-
-    @Test
-    @DisplayName("Test workflow priorities")
-    @Story("Workflow priorities")
-    public void shouldTestWorkflowPriorities() {
-        String priority = "High";
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        
-        String priorityConfig = "{\n" +
-                "  \"priority\": \"" + priority + "\",\n" +
-                "  \"level\": 1,\n" +
-                "  \"description\": \"Critical workflow requiring immediate attention\",\n" +
-                "  \"sla\": \"5 minutes\",\n" +
-                "  \"escalation\": \"automatic\"\n" +
-                "}";
-        
-        String priorityAnalysis = "Priority: " + priority + "\n" +
-                "Level: 1 (Highest)\n" +
-                "SLA: 5 minutes\n" +
-                "Escalation: Automatic\n" +
-                "Resource Allocation: Maximum\n" +
-                "Monitoring: Continuous";
-        
-        String result = "Workflow priority '" + priority + "' applied successfully at " + timestamp + "\n" +
-                "Status: Active\n" +
-                "SLA: 5 minutes\n" +
-                "Resource Allocation: Maximum";
-        
-        Allure.attachment("Priority Configuration", priorityConfig);
-        Allure.attachment("Priority Analysis", priorityAnalysis);
-        Allure.attachment("Priority Result", result);
-        
-        steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("Workflow Priority: " + priority);
-        steps.shouldSeeIssueWithTitle("Workflow Priority: " + priority);
+        steps.createIssueWithTitle("Workflow Execution Test");
+        steps.shouldSeeIssueWithTitle("Workflow Execution Test");
     }
 }
