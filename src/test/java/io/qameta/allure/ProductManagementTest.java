@@ -32,6 +32,52 @@ public class ProductManagementTest {
     @JiraIssues({@JiraIssue("PM-1")})
     @DisplayName("Add new product to catalog")
     public void shouldAddNewProduct() {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        // Product Configuration (JSON)
+        String productConfig = "{\n" +
+                "  \"productId\": \"PM-T1\",\n" +
+                "  \"name\": \"Test Product\",\n" +
+                "  \"category\": \"Electronics\",\n" +
+                "  \"price\": 99.99,\n" +
+                "  \"timestamp\": \"" + timestamp + "\",\n" +
+                "  \"status\": \"active\"\n" +
+                "}";
+        
+        // Product Report (HTML)
+        String productReport = "<!DOCTYPE html>\n" +
+                "<html><head><title>Product Management Report</title></head>\n" +
+                "<body><h1>Product Management Report</h1>\n" +
+                "<p>Generated: " + timestamp + "</p>\n" +
+                "<h2>Product Details</h2>\n" +
+                "<ul>\n" +
+                "<li>Name: Test Product</li>\n" +
+                "<li>Category: Electronics</li>\n" +
+                "<li>Price: $99.99</li>\n" +
+                "<li>Status: Active</li>\n" +
+                "</ul>\n" +
+                "</body></html>";
+        
+        // Product Data (CSV)
+        String productData = "product_id,name,category,price,status,timestamp\n" +
+                "PM-T1,Test Product,Electronics,99.99,active," + timestamp;
+        
+        // Product Log (Plain Text)
+        String productLog = "PRODUCT MANAGEMENT LOG\n" +
+                "=====================\n\n" +
+                "Product ID: PM-T1\n" +
+                "Name: Test Product\n" +
+                "Category: Electronics\n" +
+                "Price: $99.99\n" +
+                "Timestamp: " + timestamp + "\n" +
+                "Status: Active\n" +
+                "Action: Product added successfully";
+        
+        Allure.attachment("Product Configuration (JSON)", productConfig);
+        Allure.attachment("Product Report (HTML)", productReport);
+        Allure.attachment("Product Data (CSV)", productData);
+        Allure.attachment("Product Log (Text)", productLog);
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Add Product Test");
         steps.shouldSeeIssueWithTitle("Add Product Test");
@@ -45,6 +91,29 @@ public class ProductManagementTest {
     @JiraIssues({@JiraIssue("PM-2")})
     @DisplayName("Edit product information")
     public void shouldEditProduct() {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        // Edit Report (HTML)
+        String editReport = "<!DOCTYPE html>\n" +
+                "<html><head><title>Product Edit Report</title></head>\n" +
+                "<body><h1>Product Edit Report</h1>\n" +
+                "<p>Generated: " + timestamp + "</p>\n" +
+                "<h2>Edit Details</h2>\n" +
+                "<ul>\n" +
+                "<li>Product: Test Product</li>\n" +
+                "<li>Action: Updated</li>\n" +
+                "<li>Status: Success</li>\n" +
+                "</ul>\n" +
+                "</body></html>";
+        
+        // Edit Metrics (CSV)
+        String editMetrics = "action,product,status,timestamp\n" +
+                "edit,Test Product,success," + timestamp;
+        
+        Allure.attachment("Edit Report (HTML)", editReport);
+        Allure.attachment("Edit Metrics (CSV)", editMetrics);
+        Allure.attachment("Edit Timestamp", timestamp);
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Edit Product Test");
         steps.shouldSeeIssueWithTitle("Edit Product Test");
