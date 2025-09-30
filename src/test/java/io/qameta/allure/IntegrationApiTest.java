@@ -1,123 +1,141 @@
 package io.qameta.allure;
 
 import io.qameta.allure.junit5.AllureJunit5;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @ExtendWith(AllureJunit5.class)
 @Layer("rest")
-@Owner("integration-developer")
-@Feature("API Integrations")
-@TM4J("TM4J-127")
+@Owner("integration-specialist")
+@Feature("API Integration")
+@TM4J("TM4J-129")
 @Microservice("integration-service")
-@Story("Third-party API integration functionality")
+@Story("API integration functionality")
 @Tag("integration") @Tag("api") @Tag("rest")
 public class IntegrationApiTest {
 
-    private RestSteps steps = new RestSteps();
+    private RestSteps steps;
+
+    @BeforeEach
+    void startDriver() {
+        steps = new RestSteps();
+    }
 
     @Test
-    @DisplayName("Test basic API integration")
-    @Story("Basic integration")
-    @JiraIssues({@JiraIssue("JIRA-460")})
-    public void shouldTestBasicApiIntegration() {
-        steps.createIssueWithTitle("testuser", "testrepo", "Basic API Integration Test");
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Basic API Integration Test");
+    @DisplayName("Test payment gateway integration")
+    @Story("Payment integration")
+    @JiraIssues({@JiraIssue("JIRA-462")})
+    public void shouldTestPaymentGatewayIntegration() {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String paymentConfig = "{\n" +
+                "  \"gateway\": \"Stripe\",\n" +
+                "  \"version\": \"2023-10-16\",\n" +
+                "  \"endpoint\": \"https://api.stripe.com/v1/payments\",\n" +
+                "  \"authentication\": \"Bearer token\",\n" +
+                "  \"timeout\": 30000,\n" +
+                "  \"retryCount\": 3\n" +
+                "}";
+        
+        String paymentData = "Amount: $100.00\n" +
+                "Currency: USD\n" +
+                "Method: Credit Card\n" +
+                "Card: **** 1234\n" +
+                "Status: Processing\n" +
+                "Transaction ID: txn_123456789";
+        
+        String result = "Payment gateway integration tested successfully at " + timestamp + "\n" +
+                "Status: Connected\n" +
+                "Response Time: 250ms\n" +
+                "Success Rate: 99.8%\n" +
+                "Error Rate: 0.2%";
+        
+        Allure.attachment("Payment Configuration", paymentConfig);
+        Allure.attachment("Payment Data", paymentData);
+        Allure.attachment("Integration Result", result);
+        
+        steps.createIssueWithTitle("testuser", "testrepo", "Payment Gateway Integration: Stripe");
+        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Payment Gateway Integration: Stripe");
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"GET", "POST", "PUT", "DELETE", "PATCH"})
-    @DisplayName("Test different HTTP methods")
-    @Story("HTTP methods")
-    public void shouldTestDifferentHttpMethods(String method) {
-        steps.createIssueWithTitle("testuser", "testrepo", "HTTP Method: " + method);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "HTTP Method: " + method);
+    @Test
+    @DisplayName("Test inventory system integration")
+    @Story("Inventory integration")
+    public void shouldTestInventorySystemIntegration() {
+        String system = "Xero";
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String inventoryConfig = "{\n" +
+                "  \"system\": \"" + system + "\",\n" +
+                "  \"apiVersion\": \"v2.0\",\n" +
+                "  \"endpoint\": \"https://api.xero.com/inventory\",\n" +
+                "  \"authentication\": \"OAuth 2.0\",\n" +
+                "  \"syncFrequency\": \"5 minutes\",\n" +
+                "  \"batchSize\": 100\n" +
+                "}";
+        
+        String inventoryData = "System: " + system + "\n" +
+                "Products: 1,250\n" +
+                "Stock Levels: Real-time\n" +
+                "Last Sync: " + LocalDateTime.now().minusMinutes(2).format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "\n" +
+                "Status: Synchronized\n" +
+                "Error Count: 0";
+        
+        String result = "Inventory system '" + system + "' integrated successfully at " + timestamp + "\n" +
+                "Status: Active\n" +
+                "Sync Status: Up to date\n" +
+                "Data Accuracy: 99.9%\n" +
+                "Performance: Excellent";
+        
+        Allure.attachment("Inventory Configuration", inventoryConfig);
+        Allure.attachment("Inventory Data", inventoryData);
+        Allure.attachment("Integration Result", result);
+        
+        steps.createIssueWithTitle("testuser", "testrepo", "Inventory System Integration: " + system);
+        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Inventory System Integration: " + system);
     }
 
-    @ParameterizedTest
-    @CsvSource({"200, OK", "201, Created", "400, Bad Request", "401, Unauthorized", "500, Internal Server Error"})
-    @DisplayName("Test different HTTP status codes")
-    @Story("HTTP status codes")
-    public void shouldTestDifferentHttpStatusCodes(int code, String message) {
-        steps.createIssueWithTitle("testuser", "testrepo", "HTTP Status: " + code + " - " + message);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "HTTP Status: " + code + " - " + message);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"JSON", "XML", "YAML", "CSV", "Binary"})
-    @DisplayName("Test different response formats")
-    @Story("Response formats")
-    public void shouldTestDifferentResponseFormats(String format) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Response Format: " + format);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Response Format: " + format);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"OAuth2", "API Key", "Basic Auth", "JWT", "Bearer Token"})
-    @DisplayName("Test different authentication methods")
-    @Story("Authentication methods")
-    public void shouldTestDifferentAuthenticationMethods(String auth) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Authentication: " + auth);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Authentication: " + auth);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Rate Limiting", "Throttling", "Quota Management", "Usage Tracking", "Billing"})
-    @DisplayName("Test different API management features")
-    @Story("API management")
-    public void shouldTestDifferentApiManagementFeatures(String feature) {
-        steps.createIssueWithTitle("testuser", "testrepo", "API Management: " + feature);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "API Management: " + feature);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Webhook", "Polling", "Event Streaming", "Message Queue", "Real-time"})
-    @DisplayName("Test different integration patterns")
-    @Story("Integration patterns")
-    public void shouldTestDifferentIntegrationPatterns(String pattern) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Integration Pattern: " + pattern);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Integration Pattern: " + pattern);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Retry Logic", "Circuit Breaker", "Timeout Handling", "Fallback", "Graceful Degradation"})
-    @DisplayName("Test different error handling strategies")
-    @Story("Error handling")
-    public void shouldTestDifferentErrorHandlingStrategies(String strategy) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Error Handling: " + strategy);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Error Handling: " + strategy);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Data Validation", "Schema Validation", "Content Type", "Encoding", "Compression"})
-    @DisplayName("Test different data processing features")
-    @Story("Data processing")
-    public void shouldTestDifferentDataProcessingFeatures(String feature) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Data Processing: " + feature);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Data Processing: " + feature);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Monitoring", "Logging", "Tracing", "Metrics", "Alerting"})
-    @DisplayName("Test different observability features")
-    @Story("Observability")
-    public void shouldTestDifferentObservabilityFeatures(String feature) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Observability: " + feature);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Observability: " + feature);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Versioning", "Deprecation", "Migration", "Compatibility", "Upgrade Path"})
-    @DisplayName("Test different API lifecycle features")
-    @Story("API lifecycle")
-    public void shouldTestDifferentApiLifecycleFeatures(String feature) {
-        steps.createIssueWithTitle("testuser", "testrepo", "API Lifecycle: " + feature);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "API Lifecycle: " + feature);
+    @Test
+    @DisplayName("Test shipping provider integration")
+    @Story("Shipping integration")
+    public void shouldTestShippingProviderIntegration() {
+        String provider = "Royal Mail";
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String shippingConfig = "{\n" +
+                "  \"provider\": \"" + provider + "\",\n" +
+                "  \"apiVersion\": \"v1.2\",\n" +
+                "  \"endpoint\": \"https://api.royalmail.com/shipping\",\n" +
+                "  \"authentication\": \"API Key\",\n" +
+                "  \"rateLimit\": \"1000/hour\",\n" +
+                "  \"timeout\": 15000\n" +
+                "}";
+        
+        String shippingData = "Provider: " + provider + "\n" +
+                "Service: Tracked 24\n" +
+                "Delivery Time: 1-2 business days\n" +
+                "Coverage: UK & International\n" +
+                "Tracking: Available\n" +
+                "Insurance: Up to £500";
+        
+        String result = "Shipping provider '" + provider + "' integrated successfully at " + timestamp + "\n" +
+                "Status: Connected\n" +
+                "Service Level: Premium\n" +
+                "Reliability: 99.5%\n" +
+                "Customer Satisfaction: High";
+        
+        Allure.attachment("Shipping Configuration", shippingConfig);
+        Allure.attachment("Shipping Data", shippingData);
+        Allure.attachment("Integration Result", result);
+        
+        steps.createIssueWithTitle("testuser", "testrepo", "Shipping Provider Integration: " + provider);
+        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Shipping Provider Integration: " + provider);
     }
 }

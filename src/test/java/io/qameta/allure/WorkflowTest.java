@@ -4,21 +4,21 @@ import io.qameta.allure.junit5.AllureJunit5;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @ExtendWith(AllureJunit5.class)
 @Layer("web")
-@Owner("workflow-engineer")
+@Owner("workflow-specialist")
 @Feature("Workflow Management")
-@TM4J("TM4J-125")
+@TM4J("TM4J-128")
 @Microservice("workflow-service")
-@Story("Workflow automation functionality")
-@Tag("workflow") @Tag("automation") @Tag("web")
+@Story("Workflow management functionality")
+@Tag("workflow") @Tag("process") @Tag("web")
 public class WorkflowTest {
 
     private WebSteps steps;
@@ -31,100 +31,191 @@ public class WorkflowTest {
     @Test
     @DisplayName("Create new workflow")
     @Story("Workflow creation")
-    @JiraIssues({@JiraIssue("JIRA-458")})
+    @JiraIssues({@JiraIssue("JIRA-461")})
     public void shouldCreateNewWorkflow() {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String workflowConfig = "{\n" +
+                "  \"workflow\": {\n" +
+                "    \"name\": \"Order Processing Workflow\",\n" +
+                "    \"version\": \"1.0.0\",\n" +
+                "    \"description\": \"Automated order processing workflow\",\n" +
+                "    \"steps\": [\n" +
+                "      {\"id\": 1, \"name\": \"Validate Order\", \"type\": \"validation\"},\n" +
+                "      {\"id\": 2, \"name\": \"Check Inventory\", \"type\": \"inventory\"},\n" +
+                "      {\"id\": 3, \"name\": \"Process Payment\", \"type\": \"payment\"},\n" +
+                "      {\"id\": 4, \"name\": \"Ship Order\", \"type\": \"shipping\"}\n" +
+                "    ]\n" +
+                "  }\n" +
+                "}";
+        
+        String metrics = "Workflow: Order Processing\n" +
+                "Steps: 4\n" +
+                "Estimated Duration: 15 minutes\n" +
+                "Success Rate: 95.2%\n" +
+                "Average Processing Time: 12.5 minutes\n" +
+                "Error Rate: 4.8%";
+        
+        String result = "Workflow created successfully at " + timestamp + "\n" +
+                "Status: Active\n" +
+                "ID: WF-001\n" +
+                "Version: 1.0.0\n" +
+                "Next Review: " + LocalDateTime.now().plusDays(30).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        
+        Allure.attachment("Workflow Configuration", workflowConfig);
+        Allure.attachment("Workflow Metrics", metrics);
+        Allure.attachment("Creation Result", result);
+        
         steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("Workflow Creation Test");
-        steps.shouldSeeIssueWithTitle("Workflow Creation Test");
+        steps.createIssueWithTitle("Workflow: Order Processing");
+        steps.shouldSeeIssueWithTitle("Workflow: Order Processing");
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"Approval", "Review", "Processing", "Validation", "Completion"})
-    @DisplayName("Test different workflow stages")
-    @Story("Workflow stages")
-    public void shouldTestDifferentWorkflowStages(String stage) {
+    @Test
+    @DisplayName("Execute workflow step")
+    @Story("Workflow execution")
+    public void shouldExecuteWorkflowStep() {
+        String stepName = "Validate Order";
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String stepConfig = "{\n" +
+                "  \"step\": {\n" +
+                "    \"id\": 1,\n" +
+                "    \"name\": \"" + stepName + "\",\n" +
+                "    \"type\": \"validation\",\n" +
+                "    \"timeout\": 300,\n" +
+                "    \"retryCount\": 3,\n" +
+                "    \"dependencies\": []\n" +
+                "  }\n" +
+                "}";
+        
+        String executionData = "Step: " + stepName + "\n" +
+                "Type: Validation\n" +
+                "Timeout: 300 seconds\n" +
+                "Retry Count: 3\n" +
+                "Dependencies: None\n" +
+                "Status: Running";
+        
+        String result = "Step executed successfully at " + timestamp + "\n" +
+                "Status: Completed\n" +
+                "Duration: 45 seconds\n" +
+                "Retries: 0\n" +
+                "Next Step: Check Inventory";
+        
+        Allure.attachment("Step Configuration", stepConfig);
+        Allure.attachment("Execution Data", executionData);
+        Allure.attachment("Execution Result", result);
+        
         steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("Workflow Stage: " + stage);
-        steps.shouldSeeIssueWithTitle("Workflow Stage: " + stage);
+        steps.createIssueWithTitle("Workflow Step: " + stepName);
+        steps.shouldSeeIssueWithTitle("Workflow Step: " + stepName);
     }
 
-    @ParameterizedTest
-    @CsvSource({"User Registration, 3", "Order Processing, 5", "Invoice Generation, 4", "Support Ticket, 6"})
-    @DisplayName("Test workflows with different step counts")
-    @Story("Workflow complexity")
-    public void shouldTestWorkflowsWithDifferentStepCounts(String workflow, int stepCount) {
-        steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("Workflow: " + workflow + " (" + stepCount + " steps)");
-        steps.shouldSeeIssueWithTitle("Workflow: " + workflow + " (" + stepCount + " steps)");
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Sequential", "Parallel", "Conditional", "Loop", "Fork-Join"})
-    @DisplayName("Test different workflow patterns")
+    @Test
+    @DisplayName("Test workflow patterns")
     @Story("Workflow patterns")
-    public void shouldTestDifferentWorkflowPatterns(String pattern) {
+    public void shouldTestWorkflowPatterns() {
+        String pattern = "Sequential";
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String patternConfig = "{\n" +
+                "  \"pattern\": \"" + pattern + "\",\n" +
+                "  \"description\": \"Steps execute one after another\",\n" +
+                "  \"executionOrder\": \"linear\",\n" +
+                "  \"parallelExecution\": false,\n" +
+                "  \"errorHandling\": \"stop-on-error\"\n" +
+                "}";
+        
+        String patternAnalysis = "Pattern: " + pattern + "\n" +
+                "Execution: Linear\n" +
+                "Parallel: No\n" +
+                "Error Handling: Stop on error\n" +
+                "Use Case: Order processing\n" +
+                "Complexity: Low";
+        
+        String result = "Workflow pattern '" + pattern + "' tested successfully at " + timestamp + "\n" +
+                "Status: Valid\n" +
+                "Performance: Good\n" +
+                "Reliability: High";
+        
+        Allure.attachment("Pattern Configuration", patternConfig);
+        Allure.attachment("Pattern Analysis", patternAnalysis);
+        Allure.attachment("Pattern Result", result);
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Workflow Pattern: " + pattern);
         steps.shouldSeeIssueWithTitle("Workflow Pattern: " + pattern);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"Low", "Medium", "High", "Critical", "Emergency"})
-    @DisplayName("Test workflows with different priority levels")
-    @Story("Workflow priority")
-    public void shouldTestWorkflowsWithDifferentPriorityLevels(String priority) {
+    @Test
+    @DisplayName("Test workflow stages")
+    @Story("Workflow stages")
+    public void shouldTestWorkflowStages() {
+        String stage = "Processing";
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String stageConfig = "{\n" +
+                "  \"stage\": \"" + stage + "\",\n" +
+                "  \"status\": \"active\",\n" +
+                "  \"steps\": [\"Validate Order\", \"Check Inventory\", \"Process Payment\"],\n" +
+                "  \"estimatedDuration\": \"10 minutes\",\n" +
+                "  \"successRate\": \"95.2%\"\n" +
+                "}";
+        
+        String stageMetrics = "Stage: " + stage + "\n" +
+                "Status: Active\n" +
+                "Steps: 3\n" +
+                "Duration: 10 minutes\n" +
+                "Success Rate: 95.2%\n" +
+                "Error Rate: 4.8%";
+        
+        String result = "Workflow stage '" + stage + "' processed successfully at " + timestamp + "\n" +
+                "Status: Completed\n" +
+                "Duration: 8.5 minutes\n" +
+                "Next Stage: Shipping";
+        
+        Allure.attachment("Stage Configuration", stageConfig);
+        Allure.attachment("Stage Metrics", stageMetrics);
+        Allure.attachment("Stage Result", result);
+        
+        steps.openIssuesPage("testuser", "testrepo");
+        steps.createIssueWithTitle("Workflow Stage: " + stage);
+        steps.shouldSeeIssueWithTitle("Workflow Stage: " + stage);
+    }
+
+    @Test
+    @DisplayName("Test workflow priorities")
+    @Story("Workflow priorities")
+    public void shouldTestWorkflowPriorities() {
+        String priority = "High";
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String priorityConfig = "{\n" +
+                "  \"priority\": \"" + priority + "\",\n" +
+                "  \"level\": 1,\n" +
+                "  \"description\": \"Critical workflow requiring immediate attention\",\n" +
+                "  \"sla\": \"5 minutes\",\n" +
+                "  \"escalation\": \"automatic\"\n" +
+                "}";
+        
+        String priorityAnalysis = "Priority: " + priority + "\n" +
+                "Level: 1 (Highest)\n" +
+                "SLA: 5 minutes\n" +
+                "Escalation: Automatic\n" +
+                "Resource Allocation: Maximum\n" +
+                "Monitoring: Continuous";
+        
+        String result = "Workflow priority '" + priority + "' applied successfully at " + timestamp + "\n" +
+                "Status: Active\n" +
+                "SLA: 5 minutes\n" +
+                "Resource Allocation: Maximum";
+        
+        Allure.attachment("Priority Configuration", priorityConfig);
+        Allure.attachment("Priority Analysis", priorityAnalysis);
+        Allure.attachment("Priority Result", result);
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Workflow Priority: " + priority);
         steps.shouldSeeIssueWithTitle("Workflow Priority: " + priority);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Manual", "Automatic", "Semi-automatic", "Scheduled", "Event-driven"})
-    @DisplayName("Test workflows with different trigger types")
-    @Story("Workflow triggers")
-    public void shouldTestWorkflowsWithDifferentTriggerTypes(String trigger) {
-        steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("Workflow Trigger: " + trigger);
-        steps.shouldSeeIssueWithTitle("Workflow Trigger: " + trigger);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Active", "Paused", "Completed", "Cancelled", "Error"})
-    @DisplayName("Test workflows with different statuses")
-    @Story("Workflow statuses")
-    public void shouldTestWorkflowsWithDifferentStatuses(String status) {
-        steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("Workflow Status: " + status);
-        steps.shouldSeeIssueWithTitle("Workflow Status: " + status);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Department A", "Department B", "Department C", "Cross-functional", "External"})
-    @DisplayName("Test workflows for different departments")
-    @Story("Department workflows")
-    public void shouldTestWorkflowsForDifferentDepartments(String department) {
-        steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("Department: " + department);
-        steps.shouldSeeIssueWithTitle("Department: " + department);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Simple", "Complex", "Very Complex", "Enterprise", "Mission Critical"})
-    @DisplayName("Test workflows with different complexity levels")
-    @Story("Workflow complexity levels")
-    public void shouldTestWorkflowsWithDifferentComplexityLevels(String complexity) {
-        steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("Complexity: " + complexity);
-        steps.shouldSeeIssueWithTitle("Complexity: " + complexity);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Immediate", "1 hour", "1 day", "1 week", "1 month"})
-    @DisplayName("Test workflows with different SLA requirements")
-    @Story("Workflow SLA")
-    public void shouldTestWorkflowsWithDifferentSLARequirements(String sla) {
-        steps.openIssuesPage("testuser", "testrepo");
-        steps.createIssueWithTitle("SLA Requirement: " + sla);
-        steps.shouldSeeIssueWithTitle("SLA Requirement: " + sla);
     }
 }

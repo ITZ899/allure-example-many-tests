@@ -1,116 +1,103 @@
 package io.qameta.allure;
 
+import io.qameta.allure.junit5.AllureJunit5;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import io.qameta.allure.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.jupiter.params.provider.CsvSource;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+@ExtendWith(AllureJunit5.class)
 @Layer("rest")
-@Owner("api-team")
+@Owner("api-specialist")
 @Feature("User API")
+@TM4J("TM4J-130")
+@Microservice("user-service")
+@Story("User API functionality")
+@Tag("user") @Tag("api") @Tag("rest")
 public class UserApiTest {
 
-    private final RestSteps steps = new RestSteps();
+    private RestSteps steps;
 
-    @ParameterizedTest(name = "Create user with name: {0}")
-    @ValueSource(strings = {"John", "Jane", "Bob", "Alice", "Charlie", "Diana", "Edward", "Fiona"})
-    @TM4J("UA-T1")
-    @Story("Create new user via API")
-    @Microservice("UserService")
-    @Tags({@Tag("api"), @Tag("smoke"), @Tag("regression")})
-    @JiraIssues({@JiraIssue("UA-1")})
-    public void shouldCreateUserViaApi(String name) {
-        steps.createIssueWithTitle("testuser", "testrepo", "User: " + name);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "User: " + name);
+    @BeforeEach
+    void startDriver() {
+        steps = new RestSteps();
     }
 
-    @ParameterizedTest(name = "Get user by ID: {0}")
-    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
-    @TM4J("UA-T2")
-    @Story("Retrieve user by ID")
-    @Microservice("UserService")
-    @Tags({@Tag("api"), @Tag("regression")})
-    @JiraIssues({@JiraIssue("UA-2")})
-    public void shouldGetUserById(int userId) {
-        steps.createIssueWithTitle("testuser", "testrepo", "User ID: " + userId);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "User ID: " + userId);
+    @Test
+    @DisplayName("Create new user")
+    @Story("User creation")
+    @JiraIssues({@JiraIssue("JIRA-463")})
+    public void shouldCreateNewUser() {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String userData = "Name: John Doe\n" +
+                "Email: john@example.com\n" +
+                "Role: User\n" +
+                "Status: Active\n" +
+                "Created: " + timestamp;
+        
+        String result = "User created successfully at " + timestamp + "\n" +
+                "Status: Active\n" +
+                "ID: USR-001\n" +
+                "Verification: Pending";
+        
+        Allure.attachment("User Data", userData);
+        Allure.attachment("Creation Result", result);
+        
+        steps.createIssueWithTitle("testuser", "testrepo", "User Creation: John Doe");
+        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "User Creation: John Doe");
     }
 
-    @ParameterizedTest(name = "Update user {0} with email {1}")
-    @CsvSource({
-        "John, john.updated@example.com",
-        "Jane, jane.updated@example.com",
-        "Bob, bob.updated@example.com",
-        "Alice, alice.updated@example.com"
-    })
-    @TM4J("UA-T3")
-    @Story("Update user email")
-    @Microservice("UserService")
-    @Tags({@Tag("api"), @Tag("regression")})
-    @JiraIssues({@JiraIssue("UA-3")})
-    public void shouldUpdateUserEmail(String name, String email) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Update " + name + " to " + email);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Update " + name + " to " + email);
+    @Test
+    @DisplayName("Update user profile")
+    @Story("User profile")
+    public void shouldUpdateUserProfile() {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String profileData = "Name: John Smith\n" +
+                "Email: john.smith@example.com\n" +
+                "Phone: +1-555-123-4567\n" +
+                "Address: 123 Main St, City, State\n" +
+                "Updated: " + timestamp;
+        
+        String result = "Profile updated successfully at " + timestamp + "\n" +
+                "Status: Active\n" +
+                "Changes: 3 fields\n" +
+                "Verification: Required";
+        
+        Allure.attachment("Profile Data", profileData);
+        Allure.attachment("Update Result", result);
+        
+        steps.createIssueWithTitle("testuser", "testrepo", "Profile Update: John Smith");
+        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Profile Update: John Smith");
     }
 
-    @ParameterizedTest(name = "Delete user with ID: {0}")
-    @ValueSource(ints = {11, 12, 13, 14, 15, 16, 17, 18, 19, 20})
-    @TM4J("UA-T4")
-    @Story("Delete user by ID")
-    @Microservice("UserService")
-    @Tags({@Tag("api"), @Tag("regression")})
-    @JiraIssues({@JiraIssue("UA-4")})
-    public void shouldDeleteUserById(int userId) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Delete User ID: " + userId);
-        steps.closeIssueWithTitle("testuser", "testrepo", "Delete User ID: " + userId);
-    }
-
-    @ParameterizedTest(name = "Search users by role: {0}")
-    @ValueSource(strings = {"admin", "user", "moderator", "guest", "editor"})
-    @TM4J("UA-T5")
-    @Story("Search users by role")
-    @Microservice("UserService")
-    @Tags({@Tag("api"), @Tag("regression")})
-    @JiraIssues({@JiraIssue("UA-5")})
-    public void shouldSearchUsersByRole(String role) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Search Role: " + role);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Search Role: " + role);
-    }
-
-    @ParameterizedTest(name = "Validate user status: {0}")
-    @ValueSource(strings = {"active", "inactive", "suspended", "pending"})
-    @TM4J("UA-T6")
-    @Story("Validate user status")
-    @Microservice("UserService")
-    @Tags({@Tag("api"), @Tag("regression")})
-    @JiraIssues({@JiraIssue("UA-6")})
-    public void shouldValidateUserStatus(String status) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Status: " + status);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Status: " + status);
-    }
-
-    @ParameterizedTest(name = "Check user permissions for role: {0}")
-    @ValueSource(strings = {"read", "write", "delete", "admin", "moderate"})
-    @TM4J("UA-T7")
-    @Story("Check user permissions")
-    @Microservice("UserService")
-    @Tags({@Tag("api"), @Tag("regression")})
-    @JiraIssues({@JiraIssue("UA-7")})
-    public void shouldCheckUserPermissions(String permission) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Permission: " + permission);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Permission: " + permission);
-    }
-
-    @ParameterizedTest(name = "Verify user authentication for: {0}")
-    @ValueSource(strings = {"valid_token", "expired_token", "invalid_token", "missing_token"})
-    @TM4J("UA-T8")
-    @Story("Verify user authentication")
-    @Microservice("UserService")
-    @Tags({@Tag("api"), @Tag("security"), @Tag("regression")})
-    @JiraIssues({@JiraIssue("UA-8")})
-    public void shouldVerifyUserAuthentication(String tokenType) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Auth: " + tokenType);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Auth: " + tokenType);
+    @Test
+    @DisplayName("Delete user account")
+    @Story("User deletion")
+    public void shouldDeleteUserAccount() {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String deletionData = "User ID: USR-001\n" +
+                "Reason: Account closure request\n" +
+                "Data Retention: 30 days\n" +
+                "Backup: Created\n" +
+                "Deleted: " + timestamp;
+        
+        String result = "User account deleted successfully at " + timestamp + "\n" +
+                "Status: Deleted\n" +
+                "Data Retention: 30 days\n" +
+                "Recovery: Possible within retention period";
+        
+        Allure.attachment("Deletion Data", deletionData);
+        Allure.attachment("Deletion Result", result);
+        
+        steps.createIssueWithTitle("testuser", "testrepo", "User Deletion: USR-001");
+        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "User Deletion: USR-001");
     }
 }

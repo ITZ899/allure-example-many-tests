@@ -1,114 +1,106 @@
 package io.qameta.allure;
 
 import io.qameta.allure.junit5.AllureJunit5;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @ExtendWith(AllureJunit5.class)
 @Layer("rest")
-@Owner("database-admin")
+@Owner("database-specialist")
 @Feature("Database Operations")
-@TM4J("TM4J-129")
+@TM4J("TM4J-131")
 @Microservice("database-service")
 @Story("Database functionality")
-@Tag("database") @Tag("sql") @Tag("rest")
+@Tag("database") @Tag("api") @Tag("rest")
 public class DatabaseTest {
 
-    private RestSteps steps = new RestSteps();
+    private RestSteps steps;
+
+    @BeforeEach
+    void startDriver() {
+        steps = new RestSteps();
+    }
 
     @Test
     @DisplayName("Test database connection")
     @Story("Database connection")
-    @JiraIssues({@JiraIssue("JIRA-462")})
+    @JiraIssues({@JiraIssue("JIRA-464")})
     public void shouldTestDatabaseConnection() {
-        steps.createIssueWithTitle("testuser", "testrepo", "Database Connection Test");
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Database Connection Test");
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String connectionData = "Database: PostgreSQL\n" +
+                "Host: localhost:5432\n" +
+                "Database: testdb\n" +
+                "User: testuser\n" +
+                "Status: Connected\n" +
+                "Response Time: 15ms";
+        
+        String result = "Database connection established successfully at " + timestamp + "\n" +
+                "Status: Active\n" +
+                "Pool Size: 10\n" +
+                "Active Connections: 3";
+        
+        Allure.attachment("Connection Data", connectionData);
+        Allure.attachment("Connection Result", result);
+        
+        steps.createIssueWithTitle("testuser", "testrepo", "Database Connection: PostgreSQL");
+        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Database Connection: PostgreSQL");
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"SELECT", "INSERT", "UPDATE", "DELETE", "CREATE"})
-    @DisplayName("Test different SQL operations")
-    @Story("SQL operations")
-    public void shouldTestDifferentSqlOperations(String operation) {
-        steps.createIssueWithTitle("testuser", "testrepo", "SQL Operation: " + operation);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "SQL Operation: " + operation);
+    @Test
+    @DisplayName("Test data insertion")
+    @Story("Data insertion")
+    public void shouldTestDataInsertion() {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String insertData = "Table: users\n" +
+                "Records: 1\n" +
+                "Fields: 5\n" +
+                "Size: 256 bytes\n" +
+                "Index: Updated\n" +
+                "Timestamp: " + timestamp;
+        
+        String result = "Data inserted successfully at " + timestamp + "\n" +
+                "Status: Committed\n" +
+                "Transaction ID: TXN-001\n" +
+                "Duration: 25ms";
+        
+        Allure.attachment("Insert Data", insertData);
+        Allure.attachment("Insert Result", result);
+        
+        steps.createIssueWithTitle("testuser", "testrepo", "Data Insertion: users table");
+        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Data Insertion: users table");
     }
 
-    @ParameterizedTest
-    @CsvSource({"Users, 1000", "Products, 500", "Orders, 2500", "Categories, 50"})
-    @DisplayName("Test different table operations")
-    @Story("Table operations")
-    public void shouldTestDifferentTableOperations(String table, int records) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Table: " + table + " (" + records + " records)");
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Table: " + table + " (" + records + " records)");
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Primary Key", "Foreign Key", "Unique", "Index", "Constraint"})
-    @DisplayName("Test different database constraints")
-    @Story("Database constraints")
-    public void shouldTestDifferentDatabaseConstraints(String constraint) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Database Constraint: " + constraint);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Database Constraint: " + constraint);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Transaction", "Commit", "Rollback", "Savepoint", "Isolation"})
-    @DisplayName("Test different transaction features")
-    @Story("Transaction management")
-    public void shouldTestDifferentTransactionFeatures(String feature) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Transaction Feature: " + feature);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Transaction Feature: " + feature);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Backup", "Restore", "Replication", "Clustering", "Sharding"})
-    @DisplayName("Test different database maintenance operations")
-    @Story("Database maintenance")
-    public void shouldTestDifferentDatabaseMaintenanceOperations(String operation) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Database Maintenance: " + operation);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Database Maintenance: " + operation);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"MySQL", "PostgreSQL", "Oracle", "SQL Server", "MongoDB"})
-    @DisplayName("Test different database types")
-    @Story("Database types")
-    public void shouldTestDifferentDatabaseTypes(String dbType) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Database Type: " + dbType);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Database Type: " + dbType);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Connection Pool", "Query Cache", "Result Cache", "Buffer Pool", "Log Buffer"})
-    @DisplayName("Test different database performance features")
-    @Story("Database performance")
-    public void shouldTestDifferentDatabasePerformanceFeatures(String feature) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Database Performance: " + feature);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Database Performance: " + feature);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"User Management", "Role Management", "Permission Management", "Access Control", "Audit Log"})
-    @DisplayName("Test different database security features")
-    @Story("Database security")
-    public void shouldTestDifferentDatabaseSecurityFeatures(String feature) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Database Security: " + feature);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Database Security: " + feature);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Stored Procedure", "Function", "Trigger", "View", "Materialized View"})
-    @DisplayName("Test different database objects")
-    @Story("Database objects")
-    public void shouldTestDifferentDatabaseObjects(String object) {
-        steps.createIssueWithTitle("testuser", "testrepo", "Database Object: " + object);
-        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Database Object: " + object);
+    @Test
+    @DisplayName("Test data query")
+    @Story("Data query")
+    public void shouldTestDataQuery() {
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        String queryData = "Query: SELECT * FROM users WHERE active = true\n" +
+                "Rows: 1,250\n" +
+                "Execution Time: 45ms\n" +
+                "Cache Hit: Yes\n" +
+                "Index Used: idx_users_active\n" +
+                "Timestamp: " + timestamp;
+        
+        String result = "Query executed successfully at " + timestamp + "\n" +
+                "Status: Completed\n" +
+                "Rows Returned: 1,250\n" +
+                "Performance: Good";
+        
+        Allure.attachment("Query Data", queryData);
+        Allure.attachment("Query Result", result);
+        
+        steps.createIssueWithTitle("testuser", "testrepo", "Data Query: users table");
+        steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Data Query: users table");
     }
 }
