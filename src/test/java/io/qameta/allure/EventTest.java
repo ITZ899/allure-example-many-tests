@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.io.InputStream;
 
 @ExtendWith(AllureJunit5.class)
 @Layer("rest")
@@ -340,6 +341,16 @@ public class EventTest {
     @DisplayName("Test different event processing modes")
     @Story("Event processing modes")
     public void shouldTestDifferentEventProcessingModes(String mode) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Event Processing Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Processing Mode: " + mode);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Processing Mode: " + mode);
     }
@@ -349,6 +360,16 @@ public class EventTest {
     @DisplayName("Test different event storage backends")
     @Story("Event storage")
     public void shouldTestDifferentEventStorageBackends(String backend) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Event Storage Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Storage Backend: " + backend);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Storage Backend: " + backend);
     }
@@ -358,6 +379,16 @@ public class EventTest {
     @DisplayName("Test different event serialization formats")
     @Story("Event serialization")
     public void shouldTestDifferentEventSerializationFormats(String format) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Event Serialization Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Serialization Format: " + format);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Serialization Format: " + format);
     }
@@ -367,6 +398,16 @@ public class EventTest {
     @DisplayName("Test different event processing features")
     @Story("Event processing features")
     public void shouldTestDifferentEventProcessingFeatures(String feature) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Event Processing Features Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Processing Feature: " + feature);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Processing Feature: " + feature);
     }
@@ -376,6 +417,16 @@ public class EventTest {
     @DisplayName("Test different event error handling strategies")
     @Story("Event error handling")
     public void shouldTestDifferentEventErrorHandlingStrategies(String strategy) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Event Error Handling Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Error Handling: " + strategy);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Error Handling: " + strategy);
     }
@@ -385,6 +436,16 @@ public class EventTest {
     @DisplayName("Test different event organization features")
     @Story("Event organization")
     public void shouldTestDifferentEventOrganizationFeatures(String feature) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Event Organization Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Organization: " + feature);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Organization: " + feature);
     }
@@ -394,6 +455,16 @@ public class EventTest {
     @DisplayName("Test different event delivery modes")
     @Story("Event delivery")
     public void shouldTestDifferentEventDeliveryModes(String mode) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Event Delivery Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Delivery Mode: " + mode);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Delivery Mode: " + mode);
     }
@@ -403,6 +474,16 @@ public class EventTest {
     @DisplayName("Test different event observability features")
     @Story("Event observability")
     public void shouldTestDifferentEventObservabilityFeatures(String feature) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Event Observability Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Observability: " + feature);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Observability: " + feature);
     }
