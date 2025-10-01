@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @Layer("rest")
 @Owner("order-api-team")
@@ -67,6 +69,16 @@ public class OrderApiTest {
         Allure.attachment("Order Report (HTML)", orderReport);
         Allure.attachment("Order Data (CSV)", orderData);
         Allure.attachment("Order Log (Text)", orderLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Order Status: " + status);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Order Status: " + status);
@@ -158,6 +170,16 @@ public class OrderApiTest {
         Allure.attachment("Order Data (CSV)", orderData);
         Allure.attachment("Order Log (Text)", orderLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Order ID: " + orderId);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Order ID: " + orderId);
     }
@@ -234,6 +256,16 @@ public class OrderApiTest {
         Allure.attachment("Status Report (HTML)", statusReport);
         Allure.attachment("Status Data (CSV)", statusData);
         Allure.attachment("Status Log (Text)", statusLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Update " + orderName + " to " + newStatus);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Update " + orderName + " to " + newStatus);
@@ -312,6 +344,16 @@ public class OrderApiTest {
         Allure.attachment("Delete Data (CSV)", deleteData);
         Allure.attachment("Delete Log (Text)", deleteLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Delete Order ID: " + orderId);
         steps.closeIssueWithTitle("testuser", "testrepo", "Delete Order ID: " + orderId);
     }
@@ -378,6 +420,16 @@ public class OrderApiTest {
         Allure.attachment("Search Report (HTML)", searchReport);
         Allure.attachment("Search Data (CSV)", searchData);
         Allure.attachment("Search Log (Text)", searchLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Search Customer: " + customerEmail);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Search Customer: " + customerEmail);
@@ -453,6 +505,16 @@ public class OrderApiTest {
         Allure.attachment("Filter Report (HTML)", filterReport);
         Allure.attachment("Filter Data (CSV)", filterData);
         Allure.attachment("Filter Log (Text)", filterLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Filter Date: " + dateRange);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Filter Date: " + dateRange);
@@ -555,6 +617,16 @@ public class OrderApiTest {
         Allure.attachment("Total Data (CSV)", totalData);
         Allure.attachment("Total Log (Text)", totalLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Validate Total: " + orderName + " = " + expectedTotal);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Validate Total: " + orderName + " = " + expectedTotal);
     }
@@ -623,6 +695,16 @@ public class OrderApiTest {
         Allure.attachment("Items Report (HTML)", itemsReport);
         Allure.attachment("Items Data (CSV)", itemsData);
         Allure.attachment("Items Log (Text)", itemsLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Order Items: " + orderType);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Order Items: " + orderType);
@@ -714,6 +796,16 @@ public class OrderApiTest {
         Allure.attachment("Address Data (CSV)", addressData);
         Allure.attachment("Address Log (Text)", addressLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Shipping Address: " + addressType);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Shipping Address: " + addressType);
     }
@@ -803,6 +895,16 @@ public class OrderApiTest {
         Allure.attachment("Payment Report (HTML)", paymentReport);
         Allure.attachment("Payment Data (CSV)", paymentData);
         Allure.attachment("Payment Log (Text)", paymentLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Payment Processing: " + paymentMethod);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Payment Processing: " + paymentMethod);
