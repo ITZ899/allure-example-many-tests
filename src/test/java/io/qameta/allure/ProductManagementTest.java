@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @Layer("web")
 @Owner("product-team")
@@ -127,6 +129,16 @@ public class ProductManagementTest {
     @JiraIssues({@JiraIssue("PM-3")})
     @DisplayName("Delete product from catalog")
     public void shouldDeleteProduct() {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Product Deletion Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Delete Product Test");
         steps.closeIssueWithTitle("Delete Product Test");
@@ -140,6 +152,16 @@ public class ProductManagementTest {
     @Tags({@Tag("web"), @Tag("regression")})
     @JiraIssues({@JiraIssue("PM-4")})
     public void shouldSearchProductsByCategory(String category) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Product Search Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Category: " + category);
         steps.shouldSeeIssueWithTitle("Category: " + category);
@@ -158,6 +180,16 @@ public class ProductManagementTest {
     @Tags({@Tag("web"), @Tag("regression")})
     @JiraIssues({@JiraIssue("PM-5")})
     public void shouldFilterProductsByPrice(int minPrice, int maxPrice, String priceRange) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Product Filter Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Price Range: " + minPrice + "-" + maxPrice + " (" + priceRange + ")");
         steps.shouldSeeIssueWithTitle("Price Range: " + minPrice + "-" + maxPrice + " (" + priceRange + ")");
@@ -171,6 +203,16 @@ public class ProductManagementTest {
     @Tags({@Tag("web"), @Tag("regression")})
     @JiraIssues({@JiraIssue("PM-6")})
     public void shouldSortProductsBy(String sortBy) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Product Sort Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Sort By: " + sortBy);
         steps.shouldSeeIssueWithTitle("Sort By: " + sortBy);
@@ -184,6 +226,16 @@ public class ProductManagementTest {
     @JiraIssues({@JiraIssue("PM-7")})
     @DisplayName("Check product inventory levels")
     public void shouldCheckProductStock() {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Product Stock Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Check Stock Test");
         steps.shouldSeeIssueWithTitle("Check Stock Test");
@@ -197,6 +249,16 @@ public class ProductManagementTest {
     @JiraIssues({@JiraIssue("PM-8")})
     @DisplayName("Update product inventory quantity")
     public void shouldUpdateProductStock() {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Product Stock Update Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Update Stock Test");
         steps.shouldSeeIssueWithTitle("Update Stock Test");
@@ -210,6 +272,16 @@ public class ProductManagementTest {
     @Tags({@Tag("web"), @Tag("regression")})
     @JiraIssues({@JiraIssue("PM-9")})
     public void shouldValidateProductImage(String productName) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Product Image Validation Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Image Validation: " + productName);
         steps.shouldSeeIssueWithTitle("Image Validation: " + productName);
@@ -223,6 +295,16 @@ public class ProductManagementTest {
     @JiraIssues({@JiraIssue("PM-10")})
     @DisplayName("Add review to product")
     public void shouldAddProductReview() {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Product Review Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Add Review Test");
         steps.shouldSeeIssueWithTitle("Add Review Test");
