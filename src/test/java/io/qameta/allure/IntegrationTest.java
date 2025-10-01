@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @Layer("web")
 @Owner("integration-team")
@@ -261,6 +263,16 @@ public class IntegrationTest {
     @Tags({@Tag("web"), @Tag("integration"), @Tag("regression")})
     @JiraIssues({@JiraIssue("INT-3")})
     public void shouldIntegrateWithShippingProvider(String shippingProvider) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Shipping Integration Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Shipping Provider Integration: " + shippingProvider);
         steps.shouldSeeIssueWithTitle("Shipping Provider Integration: " + shippingProvider);
@@ -274,6 +286,16 @@ public class IntegrationTest {
     @JiraIssues({@JiraIssue("INT-4")})
     @DisplayName("Email service integration should work")
     public void shouldIntegrateWithEmailService() {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Email Integration Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Email Service Integration");
         steps.shouldSeeIssueWithTitle("Email Service Integration");
@@ -287,6 +309,16 @@ public class IntegrationTest {
     @Tags({@Tag("web"), @Tag("integration"), @Tag("regression")})
     @JiraIssues({@JiraIssue("INT-5")})
     public void shouldIntegrateWithSocialMedia(String platform) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Social Media Integration Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Social Media Integration: " + platform);
         steps.shouldSeeIssueWithTitle("Social Media Integration: " + platform);
@@ -300,6 +332,16 @@ public class IntegrationTest {
     @Tags({@Tag("web"), @Tag("integration"), @Tag("regression")})
     @JiraIssues({@JiraIssue("INT-6")})
     public void shouldIntegrateWithAnalytics(String analyticsTool) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Analytics Integration Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Analytics Integration: " + analyticsTool);
         steps.shouldSeeIssueWithTitle("Analytics Integration: " + analyticsTool);
@@ -313,6 +355,16 @@ public class IntegrationTest {
     @JiraIssues({@JiraIssue("INT-7")})
     @DisplayName("CRM integration should work")
     public void shouldIntegrateWithCRM() {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("CRM Integration Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("CRM Integration");
         steps.shouldSeeIssueWithTitle("CRM Integration");
@@ -326,6 +378,16 @@ public class IntegrationTest {
     @Tags({@Tag("web"), @Tag("integration"), @Tag("regression")})
     @JiraIssues({@JiraIssue("INT-8")})
     public void shouldIntegrateWithInventorySystem(String inventorySystem) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Inventory Integration Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Inventory System Integration: " + inventorySystem);
         steps.shouldSeeIssueWithTitle("Inventory System Integration: " + inventorySystem);
@@ -339,6 +401,16 @@ public class IntegrationTest {
     @JiraIssues({@JiraIssue("INT-9")})
     @DisplayName("Webhook integration should work")
     public void shouldIntegrateWithWebhooks() {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Webhook Integration Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Webhook Integration");
         steps.shouldSeeIssueWithTitle("Webhook Integration");
@@ -352,6 +424,16 @@ public class IntegrationTest {
     @Tags({@Tag("web"), @Tag("integration"), @Tag("regression")})
     @JiraIssues({@JiraIssue("INT-10")})
     public void shouldIntegrateWithThirdPartyAPI(String apiType) {
+        // Add video attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Third Party API Integration Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Third Party API Integration: " + apiType);
         steps.shouldSeeIssueWithTitle("Third Party API Integration: " + apiType);
