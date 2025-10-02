@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @Layer("web")
 @Owner("order-team")
@@ -110,6 +112,16 @@ public class OrderManagementTest {
         Allure.attachment("Order Data (CSV)", orderData);
         Allure.attachment("Order Log (Text)", orderLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Create New Order");
         steps.shouldSeeIssueWithTitle("Create New Order");
@@ -176,6 +188,16 @@ public class OrderManagementTest {
         Allure.attachment("Items Report (HTML)", itemsReport);
         Allure.attachment("Items Data (CSV)", itemsData);
         Allure.attachment("Items Log (Text)", itemsLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Order with " + itemCount + " items");
@@ -273,6 +295,16 @@ public class OrderManagementTest {
         Allure.attachment("Shipping Report (HTML)", shippingReport);
         Allure.attachment("Shipping Data (CSV)", shippingData);
         Allure.attachment("Shipping Log (Text)", shippingLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Shipping Method: " + shippingMethod);
@@ -387,6 +419,16 @@ public class OrderManagementTest {
         Allure.attachment("Payment Report (HTML)", paymentReport);
         Allure.attachment("Payment Data (CSV)", paymentData);
         Allure.attachment("Payment Log (Text)", paymentLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Payment Method: " + paymentMethod);
@@ -540,6 +582,16 @@ public class OrderManagementTest {
         Allure.attachment("Cancellation Data (CSV)", cancelData);
         Allure.attachment("Cancellation Log (Text)", cancelLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Cancel Order Test");
         steps.closeIssueWithTitle("Cancel Order Test");
@@ -624,6 +676,16 @@ public class OrderManagementTest {
         Allure.attachment("Status Report (HTML)", statusReport);
         Allure.attachment("Status Data (CSV)", statusData);
         Allure.attachment("Status Log (Text)", statusLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Order Status: " + status);
@@ -758,6 +820,16 @@ public class OrderManagementTest {
         Allure.attachment("Delivery Data (CSV)", deliveryData);
         Allure.attachment("Delivery Log (Text)", deliveryLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Delivery Date: " + deliveryDate + " (" + expectedMethod + ")");
         steps.shouldSeeIssueWithTitle("Delivery Date: " + deliveryDate + " (" + expectedMethod + ")");
@@ -880,6 +952,16 @@ public class OrderManagementTest {
         Allure.attachment("Reorder Data (CSV)", reorderData);
         Allure.attachment("Reorder Log (Text)", reorderLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Reorder from History");
         steps.shouldSeeIssueWithTitle("Reorder from History");
@@ -974,6 +1056,16 @@ public class OrderManagementTest {
         Allure.attachment("Notification Report (HTML)", notificationReport);
         Allure.attachment("Notification Data (CSV)", notificationData);
         Allure.attachment("Notification Log (Text)", notificationLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Order Notification: " + notificationType);
@@ -1138,6 +1230,16 @@ public class OrderManagementTest {
         Allure.attachment("Export Report (HTML)", exportReport);
         Allure.attachment("Export Data (CSV)", exportData);
         Allure.attachment("Export Log (Text)", exportLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Export Order History");
