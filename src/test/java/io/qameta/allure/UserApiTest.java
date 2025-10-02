@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @ExtendWith(AllureJunit5.class)
 @Layer("rest")
@@ -49,6 +51,16 @@ public class UserApiTest {
         Allure.attachment("User Data", userData);
         Allure.attachment("Creation Result", result);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "User Creation: John Doe");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "User Creation: John Doe");
     }
@@ -73,6 +85,16 @@ public class UserApiTest {
         Allure.attachment("Profile Data", profileData);
         Allure.attachment("Update Result", result);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Profile Update: John Smith");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Profile Update: John Smith");
     }
@@ -96,6 +118,16 @@ public class UserApiTest {
         
         Allure.attachment("Deletion Data", deletionData);
         Allure.attachment("Deletion Result", result);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "User Deletion: USR-001");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "User Deletion: USR-001");
