@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 /**
  * @author eroshenkoam (Artem Eroshenko).
@@ -81,6 +83,16 @@ public class IssuesWebTest {
         Allure.attachment("Issue Data (CSV)", issueData);
         Allure.attachment("Issue Log (Text)", issueLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage(OWNER, REPO);
         steps.createIssueWithTitle(ISSUE_TITLE);
         steps.shouldSeeIssueWithTitle(ISSUE_TITLE);
@@ -116,6 +128,16 @@ public class IssuesWebTest {
         Allure.attachment("Close Report (HTML)", closeReport);
         Allure.attachment("Close Metrics (CSV)", closeMetrics);
         Allure.attachment("Close Timestamp", timestamp);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage(OWNER, REPO);
         steps.createIssueWithTitle(ISSUE_TITLE);
