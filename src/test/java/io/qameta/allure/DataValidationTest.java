@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @ExtendWith(AllureJunit5.class)
 @Layer("web")
@@ -88,6 +90,16 @@ public class DataValidationTest {
         Allure.attachment("Validation Log (Text)", textLog);
         Allure.attachment("Validation JavaScript", jsCode);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Data Validation Test");
         steps.shouldSeeIssueWithTitle("Data Validation Test");
@@ -107,6 +119,16 @@ public class DataValidationTest {
 
         Allure.attachment("Format Validation Results", formatResults);
         Allure.attachment("Validation Timestamp", timestamp);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
 
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Data Format Validation");
