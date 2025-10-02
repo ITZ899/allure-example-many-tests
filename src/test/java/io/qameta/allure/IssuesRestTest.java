@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @Layer("rest")
 @Owner("baev")
@@ -68,6 +70,16 @@ public class IssuesRestTest {
         Allure.attachment("API Metrics (CSV)", apiMetrics);
         Allure.attachment("API Log (Text)", apiLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle(OWNER, REPO, title);
         steps.shouldSeeIssueWithTitle(OWNER, REPO, title);
     }
@@ -111,6 +123,16 @@ public class IssuesRestTest {
         Allure.attachment("Close Response (HTML)", closeResponse);
         Allure.attachment("Close Metrics (CSV)", closeMetrics);
         Allure.attachment("Close Timestamp", timestamp);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.createIssueWithTitle(OWNER, REPO, title);
         steps.closeIssueWithTitle(OWNER, REPO, title);
