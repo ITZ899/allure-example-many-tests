@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @ExtendWith(AllureJunit5.class)
 @Layer("web")
@@ -214,6 +216,16 @@ public class WorkflowTest {
         Allure.attachment("Status Report (Text)", statusReport);
         Allure.attachment("Workflow JavaScript", workflowJS);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Workflow Creation Test");
         steps.shouldSeeIssueWithTitle("Workflow Creation Test");
@@ -247,6 +259,16 @@ public class WorkflowTest {
         Allure.attachment("Execution Metrics (CSV)", executionMetrics);
         Allure.attachment("Performance Report (HTML)", performanceReport);
         Allure.attachment("Execution Timestamp", timestamp);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Workflow Execution Test");
