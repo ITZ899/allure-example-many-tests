@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @ExtendWith(AllureJunit5.class)
 @Layer("web")
@@ -193,6 +195,16 @@ public class NotificationSystemTest {
         Allure.attachment("Notification Log (Text)", notificationLog);
         Allure.attachment("Notification JavaScript", notificationJS);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Notification System Test");
         steps.shouldSeeIssueWithTitle("Notification System Test");
@@ -226,6 +238,16 @@ public class NotificationSystemTest {
         Allure.attachment("Delivery Report (HTML)", deliveryReport);
         Allure.attachment("Delivery Metrics (CSV)", deliveryMetrics);
         Allure.attachment("Delivery Timestamp", timestamp);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Notification Delivery Test");
