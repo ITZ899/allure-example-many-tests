@@ -12,6 +12,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @ExtendWith(AllureJunit5.class)
 @Layer("web")
@@ -256,6 +258,16 @@ public class MobileTest {
         Allure.attachment("Mobile Log (Text)", mobileLog);
         Allure.attachment("Mobile JavaScript", mobileJS);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Mobile Responsive Design Test");
         steps.shouldSeeIssueWithTitle("Mobile Responsive Design Test");
@@ -317,6 +329,16 @@ public class MobileTest {
         Allure.attachment("Resolution Report (HTML)", resolutionReport);
         Allure.attachment("Resolution Data (CSV)", resolutionData);
         Allure.attachment("Resolution Log (Text)", resolutionLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Mobile Resolution: " + resolution);
@@ -402,6 +424,16 @@ public class MobileTest {
         Allure.attachment("Orientation Data (CSV)", orientationData);
         Allure.attachment("Orientation Log (Text)", orientationLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Mobile Orientation: " + orientation + " (" + dimensions + ")");
         steps.shouldSeeIssueWithTitle("Mobile Orientation: " + orientation + " (" + dimensions + ")");
@@ -457,6 +489,16 @@ public class MobileTest {
         Allure.attachment("Gesture Report (HTML)", gestureReport);
         Allure.attachment("Gesture Data (CSV)", gestureData);
         Allure.attachment("Gesture Log (Text)", gestureLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Mobile Gesture: " + gesture);
@@ -547,6 +589,16 @@ public class MobileTest {
         Allure.attachment("Browser Data (CSV)", browserData);
         Allure.attachment("Browser Log (Text)", browserLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Mobile Browser: " + browser);
         steps.shouldSeeIssueWithTitle("Mobile Browser: " + browser);
@@ -635,6 +687,16 @@ public class MobileTest {
         Allure.attachment("Device Report (HTML)", deviceReport);
         Allure.attachment("Device Data (CSV)", deviceData);
         Allure.attachment("Device Log (Text)", deviceLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Mobile Device: " + device);
@@ -725,6 +787,16 @@ public class MobileTest {
         Allure.attachment("Network Data (CSV)", networkData);
         Allure.attachment("Network Log (Text)", networkLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Mobile Network: " + network);
         steps.shouldSeeIssueWithTitle("Mobile Network: " + network);
@@ -813,6 +885,16 @@ public class MobileTest {
         Allure.attachment("Sensor Report (HTML)", sensorReport);
         Allure.attachment("Sensor Data (CSV)", sensorData);
         Allure.attachment("Sensor Log (Text)", sensorLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Mobile Sensor: " + sensor);
@@ -903,6 +985,16 @@ public class MobileTest {
         Allure.attachment("Notification Data (CSV)", notificationData);
         Allure.attachment("Notification Log (Text)", notificationLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Mobile Notification: " + notification);
         steps.shouldSeeIssueWithTitle("Mobile Notification: " + notification);
@@ -991,6 +1083,16 @@ public class MobileTest {
         Allure.attachment("App State Report (HTML)", stateReport);
         Allure.attachment("App State Data (CSV)", stateData);
         Allure.attachment("App State Log (Text)", stateLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Mobile App State: " + state);
