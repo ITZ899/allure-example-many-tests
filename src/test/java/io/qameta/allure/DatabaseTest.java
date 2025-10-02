@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @ExtendWith(AllureJunit5.class)
 @Layer("rest")
@@ -50,6 +52,16 @@ public class DatabaseTest {
         Allure.attachment("Connection Data", connectionData);
         Allure.attachment("Connection Result", result);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Database Connection: PostgreSQL");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Database Connection: PostgreSQL");
     }
@@ -75,6 +87,16 @@ public class DatabaseTest {
         Allure.attachment("Insert Data", insertData);
         Allure.attachment("Insert Result", result);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Data Insertion: users table");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Data Insertion: users table");
     }
@@ -99,6 +121,16 @@ public class DatabaseTest {
         
         Allure.attachment("Query Data", queryData);
         Allure.attachment("Query Result", result);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Data Query: users table");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Data Query: users table");
