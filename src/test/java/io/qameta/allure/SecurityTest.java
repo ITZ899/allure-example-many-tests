@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @Layer("web")
 @Owner("security-team")
@@ -119,6 +121,16 @@ public class SecurityTest {
         Allure.attachment("Security Report (HTML)", securityReport);
         Allure.attachment("Security Data (CSV)", securityData);
         Allure.attachment("Security Log (Text)", securityLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("SQL Injection Prevention Test");
@@ -233,6 +245,16 @@ public class SecurityTest {
         Allure.attachment("XSS Report (HTML)", xssReport);
         Allure.attachment("XSS Data (CSV)", xssData);
         Allure.attachment("XSS Log (Text)", xssLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("XSS Prevention: " + xssPayload);
@@ -358,6 +380,16 @@ public class SecurityTest {
         Allure.attachment("Auth Data (CSV)", authData);
         Allure.attachment("Auth Log (Text)", authLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Invalid Credentials: " + username + "/" + password);
         steps.shouldSeeIssueWithTitle("Invalid Credentials: " + username + "/" + password);
@@ -481,6 +513,16 @@ public class SecurityTest {
         Allure.attachment("Session Data (CSV)", sessionData);
         Allure.attachment("Session Log (Text)", sessionLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Session Timeout Test");
         steps.shouldSeeIssueWithTitle("Session Timeout Test");
@@ -594,6 +636,16 @@ public class SecurityTest {
         Allure.attachment("CSRF Report (HTML)", csrfReport);
         Allure.attachment("CSRF Data (CSV)", csrfData);
         Allure.attachment("CSRF Log (Text)", csrfLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("CSRF Protection: " + httpMethod);
@@ -720,6 +772,16 @@ public class SecurityTest {
         Allure.attachment("Authorization Data (CSV)", authzData);
         Allure.attachment("Authorization Log (Text)", authzLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Unauthorized Access Prevention");
         steps.shouldSeeIssueWithTitle("Unauthorized Access Prevention");
@@ -828,6 +890,16 @@ public class SecurityTest {
         Allure.attachment("Password Report (HTML)", passwordReport);
         Allure.attachment("Password Data (CSV)", passwordData);
         Allure.attachment("Password Log (Text)", passwordLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Weak Password Rejection: " + weakPassword);
@@ -950,6 +1022,16 @@ public class SecurityTest {
         Allure.attachment("Logging Data (CSV)", loggingData);
         Allure.attachment("Logging Log (Text)", loggingLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Failed Login Logging Test");
         steps.shouldSeeIssueWithTitle("Failed Login Logging Test");
@@ -1064,6 +1146,16 @@ public class SecurityTest {
         Allure.attachment("File Report (HTML)", fileReport);
         Allure.attachment("File Data (CSV)", fileData);
         Allure.attachment("File Log (Text)", fileLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Dangerous File Rejection: " + fileExtension);
@@ -1205,6 +1297,16 @@ public class SecurityTest {
         Allure.attachment("HTTPS Report (HTML)", httpsReport);
         Allure.attachment("HTTPS Data (CSV)", httpsData);
         Allure.attachment("HTTPS Log (Text)", httpsLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("HTTP to HTTPS Redirect Test");
