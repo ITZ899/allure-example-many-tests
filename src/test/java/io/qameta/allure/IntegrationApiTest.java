@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @ExtendWith(AllureJunit5.class)
 @Layer("rest")
@@ -105,6 +107,16 @@ public class IntegrationApiTest {
         Allure.attachment("Test Report (Text)", testReport);
         Allure.attachment("Integration JavaScript", integrationJS);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Integration API Test");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Integration API Test");
     }
@@ -137,6 +149,16 @@ public class IntegrationApiTest {
         Allure.attachment("Sync Report (HTML)", syncReport);
         Allure.attachment("Sync Metrics (CSV)", syncMetrics);
         Allure.attachment("Sync Timestamp", timestamp);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "API Data Sync Test");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "API Data Sync Test");
