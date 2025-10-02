@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @ExtendWith(AllureJunit5.class)
 @Layer("web")
@@ -173,6 +175,16 @@ public class AnalyticsTest {
         Allure.attachment("Summary Report (Text)", textSummary);
         Allure.attachment("Dashboard JavaScript", jsCode);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Analytics Dashboard Loading");
         steps.shouldSeeIssueWithTitle("Analytics Dashboard Loading");
@@ -209,7 +221,17 @@ public class AnalyticsTest {
         Allure.attachment("View Configuration", viewConfig);
         Allure.attachment("Performance Metrics", performance);
         Allure.attachment("View Result", result);
-
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Analytics View: Real-time");
         steps.shouldSeeIssueWithTitle("Analytics View: Real-time");
