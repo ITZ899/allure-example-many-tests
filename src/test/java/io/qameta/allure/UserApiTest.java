@@ -61,6 +61,16 @@ public class UserApiTest {
             // If big.json file is not found, continue with test
         }
         
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "User Creation: John Doe");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "User Creation: John Doe");
     }
@@ -95,6 +105,16 @@ public class UserApiTest {
             // If big.json file is not found, continue with test
         }
         
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Profile Update: John Smith");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Profile Update: John Smith");
     }
@@ -127,6 +147,16 @@ public class UserApiTest {
             }
         } catch (Exception e) {
             // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
         }
         
         steps.createIssueWithTitle("testuser", "testrepo", "User Deletion: USR-001");

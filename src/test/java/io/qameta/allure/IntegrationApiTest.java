@@ -117,6 +117,16 @@ public class IntegrationApiTest {
             // If big.json file is not found, continue with test
         }
         
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Integration API Test");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Integration API Test");
     }
@@ -158,6 +168,16 @@ public class IntegrationApiTest {
             }
         } catch (Exception e) {
             // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
         }
         
         steps.createIssueWithTitle("testuser", "testrepo", "API Data Sync Test");

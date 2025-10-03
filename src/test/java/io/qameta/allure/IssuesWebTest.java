@@ -93,6 +93,16 @@ public class IssuesWebTest {
             // If big.json file is not found, continue with test
         }
         
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.openIssuesPage(OWNER, REPO);
         steps.createIssueWithTitle(ISSUE_TITLE);
         steps.shouldSeeIssueWithTitle(ISSUE_TITLE);
@@ -137,6 +147,16 @@ public class IssuesWebTest {
             }
         } catch (Exception e) {
             // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage(OWNER, REPO);

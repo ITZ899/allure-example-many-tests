@@ -62,6 +62,16 @@ public class DatabaseTest {
             // If big.json file is not found, continue with test
         }
         
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Database Connection: PostgreSQL");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Database Connection: PostgreSQL");
     }
@@ -97,6 +107,16 @@ public class DatabaseTest {
             // If big.json file is not found, continue with test
         }
         
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Data Insertion: users table");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Data Insertion: users table");
     }
@@ -130,6 +150,16 @@ public class DatabaseTest {
             }
         } catch (Exception e) {
             // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
         }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Data Query: users table");
