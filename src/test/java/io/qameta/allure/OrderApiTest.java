@@ -80,6 +80,16 @@ public class OrderApiTest {
             // If big.json file is not found, continue with test
         }
         
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Order Status: " + status);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Order Status: " + status);
     }
@@ -180,6 +190,16 @@ public class OrderApiTest {
             // If big.json file is not found, continue with test
         }
         
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Order ID: " + orderId);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Order ID: " + orderId);
     }
@@ -265,6 +285,16 @@ public class OrderApiTest {
             }
         } catch (Exception e) {
             // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
         }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Update " + orderName + " to " + newStatus);
@@ -354,6 +384,16 @@ public class OrderApiTest {
             // If big.json file is not found, continue with test
         }
         
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Delete Order ID: " + orderId);
         steps.closeIssueWithTitle("testuser", "testrepo", "Delete Order ID: " + orderId);
     }
@@ -429,6 +469,16 @@ public class OrderApiTest {
             }
         } catch (Exception e) {
             // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
         }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Search Customer: " + customerEmail);
@@ -514,6 +564,16 @@ public class OrderApiTest {
             }
         } catch (Exception e) {
             // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
         }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Filter Date: " + dateRange);
@@ -627,6 +687,16 @@ public class OrderApiTest {
             // If big.json file is not found, continue with test
         }
         
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Validate Total: " + orderName + " = " + expectedTotal);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Validate Total: " + orderName + " = " + expectedTotal);
     }
@@ -704,6 +774,16 @@ public class OrderApiTest {
             }
         } catch (Exception e) {
             // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
         }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Order Items: " + orderType);
@@ -806,6 +886,16 @@ public class OrderApiTest {
             // If big.json file is not found, continue with test
         }
         
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Shipping Address: " + addressType);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Shipping Address: " + addressType);
     }
@@ -904,6 +994,16 @@ public class OrderApiTest {
             }
         } catch (Exception e) {
             // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
         }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Payment Processing: " + paymentMethod);

@@ -226,16 +226,6 @@ public class EventTest {
         Allure.attachment("Event Log (Text)", eventLog);
         Allure.attachment("Event JavaScript", eventJS);
         
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
-        
         steps.createIssueWithTitle("testuser", "testrepo", "Event System Initialization Test");
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event System Initialization Test");
     }
@@ -288,16 +278,6 @@ public class EventTest {
         Allure.attachment("Event Type Report (HTML)", eventTypeReport);
         Allure.attachment("Event Type Data (CSV)", eventTypeData);
         Allure.attachment("Event Type Log (Text)", eventTypeLog);
-        
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Event Type: " + eventType);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Type: " + eventType);
@@ -352,16 +332,6 @@ public class EventTest {
         Allure.attachment("Priority Data (CSV)", priorityData);
         Allure.attachment("Priority Log (Text)", priorityLog);
         
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
-        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Priority: " + priority + " -> " + processingTime);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Priority: " + priority + " -> " + processingTime);
     }
@@ -379,16 +349,6 @@ public class EventTest {
             }
         } catch (Exception e) {
             // If video file is not found, continue with test
-        }
-        
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
         }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Event Processing Mode: " + mode);
@@ -410,16 +370,6 @@ public class EventTest {
             // If video file is not found, continue with test
         }
         
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
-        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Storage Backend: " + backend);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Storage Backend: " + backend);
     }
@@ -437,16 +387,6 @@ public class EventTest {
             }
         } catch (Exception e) {
             // If video file is not found, continue with test
-        }
-        
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
         }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Event Serialization Format: " + format);
@@ -468,16 +408,6 @@ public class EventTest {
             // If video file is not found, continue with test
         }
         
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
-        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Processing Feature: " + feature);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Processing Feature: " + feature);
     }
@@ -495,16 +425,6 @@ public class EventTest {
             }
         } catch (Exception e) {
             // If video file is not found, continue with test
-        }
-        
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
         }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Event Error Handling: " + strategy);
@@ -526,16 +446,6 @@ public class EventTest {
             // If video file is not found, continue with test
         }
         
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
-        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Organization: " + feature);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Organization: " + feature);
     }
@@ -555,16 +465,6 @@ public class EventTest {
             // If video file is not found, continue with test
         }
         
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
-        
         steps.createIssueWithTitle("testuser", "testrepo", "Event Delivery Mode: " + mode);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Event Delivery Mode: " + mode);
     }
@@ -582,16 +482,6 @@ public class EventTest {
             }
         } catch (Exception e) {
             // If video file is not found, continue with test
-        }
-        
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
         }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Event Observability: " + feature);

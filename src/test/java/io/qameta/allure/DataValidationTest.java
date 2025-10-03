@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import io.qameta.allure.Allure;
 import java.io.InputStream;
 
 @ExtendWith(AllureJunit5.class)
@@ -90,14 +89,14 @@ public class DataValidationTest {
         Allure.attachment("Validation Log (Text)", textLog);
         Allure.attachment("Validation JavaScript", jsCode);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -120,16 +119,16 @@ public class DataValidationTest {
         Allure.attachment("Format Validation Results", formatResults);
         Allure.attachment("Validation Timestamp", timestamp);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
-
+        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Data Format Validation");
         steps.shouldSeeIssueWithTitle("Data Format Validation");

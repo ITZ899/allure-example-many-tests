@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import io.qameta.allure.Allure;
+import java.io.InputStream;
 
 @Layer("rest")
 @Owner("notification-api-team")
@@ -68,6 +70,26 @@ public class NotificationApiTest {
         Allure.attachment("Channel Report (HTML)", channelReport);
         Allure.attachment("Channel Data (CSV)", channelData);
         Allure.attachment("Channel Log (Text)", channelLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Send Notification via: " + channel);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Send Notification via: " + channel);
@@ -171,6 +193,26 @@ public class NotificationApiTest {
         Allure.attachment("Template Data (CSV)", templateData);
         Allure.attachment("Template Log (Text)", templateLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Notification Template: " + templateName);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Notification Template: " + templateName);
     }
@@ -270,6 +312,26 @@ public class NotificationApiTest {
         Allure.attachment("Notification Data (CSV)", notificationData);
         Allure.attachment("Notification Log (Text)", notificationLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Notification ID: " + notificationId);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Notification ID: " + notificationId);
     }
@@ -352,6 +414,26 @@ public class NotificationApiTest {
         Allure.attachment("Status Data (CSV)", statusData);
         Allure.attachment("Status Log (Text)", statusLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Update " + notificationName + " to " + newStatus);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Update " + notificationName + " to " + newStatus);
     }
@@ -429,6 +511,26 @@ public class NotificationApiTest {
         Allure.attachment("Delete Data (CSV)", deleteData);
         Allure.attachment("Delete Log (Text)", deleteLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Delete Notification ID: " + notificationId);
         steps.closeIssueWithTitle("testuser", "testrepo", "Delete Notification ID: " + notificationId);
     }
@@ -495,6 +597,26 @@ public class NotificationApiTest {
         Allure.attachment("Search Report (HTML)", searchReport);
         Allure.attachment("Search Data (CSV)", searchData);
         Allure.attachment("Search Log (Text)", searchLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Search Notification Type: " + notificationType);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Search Notification Type: " + notificationType);
@@ -595,6 +717,26 @@ public class NotificationApiTest {
         Allure.attachment("Priority Data (CSV)", priorityData);
         Allure.attachment("Priority Log (Text)", priorityLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Filter Priority: " + priority);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Filter Priority: " + priority);
     }
@@ -685,6 +827,26 @@ public class NotificationApiTest {
         Allure.attachment("Delivery Data (CSV)", deliveryData);
         Allure.attachment("Delivery Log (Text)", deliveryLog);
         
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
+        
         steps.createIssueWithTitle("testuser", "testrepo", "Delivery Method: " + deliveryMethod);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Delivery Method: " + deliveryMethod);
     }
@@ -774,6 +936,26 @@ public class NotificationApiTest {
         Allure.attachment("Content Report (HTML)", contentReport);
         Allure.attachment("Content Data (CSV)", contentData);
         Allure.attachment("Content Log (Text)", contentLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Content Type: " + contentType);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Content Type: " + contentType);
@@ -867,6 +1049,26 @@ public class NotificationApiTest {
         Allure.attachment("Schedule Report (HTML)", scheduleReport);
         Allure.attachment("Schedule Data (CSV)", scheduleData);
         Allure.attachment("Schedule Log (Text)", scheduleLog);
+        
+        // Add big.json file attachment
+        try {
+            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
+            if (bigJsonStream != null) {
+                Allure.attachment("Big JSON Data", bigJsonStream);
+            }
+        } catch (Exception e) {
+            // If big.json file is not found, continue with test
+        }
+        
+        // Add video file attachment
+        try {
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
+            }
+        } catch (Exception e) {
+            // If video file is not found, continue with test
+        }
         
         steps.createIssueWithTitle("testuser", "testrepo", "Notification Schedule: " + schedule);
         steps.shouldSeeIssueWithTitle("testuser", "testrepo", "Notification Schedule: " + schedule);

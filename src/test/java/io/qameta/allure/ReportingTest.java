@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import io.qameta.allure.Allure;
 import java.io.InputStream;
 
 @ExtendWith(AllureJunit5.class)
@@ -135,14 +134,14 @@ public class ReportingTest {
         Allure.attachment("Sales Report Data (CSV)", reportData);
         Allure.attachment("Sales Report Log (Text)", reportLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -242,14 +241,14 @@ public class ReportingTest {
         Allure.attachment("Time Report Data (CSV)", timeData);
         Allure.attachment("Time Report Log (Text)", timeLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -372,14 +371,14 @@ public class ReportingTest {
         Allure.attachment("Report Type Data (CSV)", typeData);
         Allure.attachment("Report Type Log (Text)", typeLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -498,14 +497,14 @@ public class ReportingTest {
         Allure.attachment("Export Format Data (CSV)", exportData);
         Allure.attachment("Export Format Log (Text)", exportLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -637,14 +636,14 @@ public class ReportingTest {
         Allure.attachment("Visualization Data (CSV)", vizData);
         Allure.attachment("Visualization Log (Text)", vizLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -776,14 +775,14 @@ public class ReportingTest {
         Allure.attachment("User Role Data (CSV)", roleData);
         Allure.attachment("User Role Log (Text)", roleLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -915,14 +914,14 @@ public class ReportingTest {
         Allure.attachment("Regional Report Data (CSV)", regionData);
         Allure.attachment("Regional Report Log (Text)", regionLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -1054,14 +1053,14 @@ public class ReportingTest {
         Allure.attachment("Delivery Method Data (CSV)", deliveryData);
         Allure.attachment("Delivery Method Log (Text)", deliveryLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -1193,14 +1192,14 @@ public class ReportingTest {
         Allure.attachment("Priority Level Data (CSV)", priorityData);
         Allure.attachment("Priority Level Log (Text)", priorityLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -1332,14 +1331,14 @@ public class ReportingTest {
         Allure.attachment("Language Data (CSV)", languageData);
         Allure.attachment("Language Log (Text)", languageLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");

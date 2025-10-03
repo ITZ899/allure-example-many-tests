@@ -258,14 +258,14 @@ public class MobileTest {
         Allure.attachment("Mobile Log (Text)", mobileLog);
         Allure.attachment("Mobile JavaScript", mobileJS);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -330,14 +330,14 @@ public class MobileTest {
         Allure.attachment("Resolution Data (CSV)", resolutionData);
         Allure.attachment("Resolution Log (Text)", resolutionLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -424,14 +424,14 @@ public class MobileTest {
         Allure.attachment("Orientation Data (CSV)", orientationData);
         Allure.attachment("Orientation Log (Text)", orientationLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -490,14 +490,14 @@ public class MobileTest {
         Allure.attachment("Gesture Data (CSV)", gestureData);
         Allure.attachment("Gesture Log (Text)", gestureLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -589,14 +589,14 @@ public class MobileTest {
         Allure.attachment("Browser Data (CSV)", browserData);
         Allure.attachment("Browser Log (Text)", browserLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -688,14 +688,14 @@ public class MobileTest {
         Allure.attachment("Device Data (CSV)", deviceData);
         Allure.attachment("Device Log (Text)", deviceLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -787,14 +787,14 @@ public class MobileTest {
         Allure.attachment("Network Data (CSV)", networkData);
         Allure.attachment("Network Log (Text)", networkLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -886,14 +886,14 @@ public class MobileTest {
         Allure.attachment("Sensor Data (CSV)", sensorData);
         Allure.attachment("Sensor Log (Text)", sensorLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -985,14 +985,14 @@ public class MobileTest {
         Allure.attachment("Notification Data (CSV)", notificationData);
         Allure.attachment("Notification Log (Text)", notificationLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -1084,14 +1084,14 @@ public class MobileTest {
         Allure.attachment("App State Data (CSV)", stateData);
         Allure.attachment("App State Log (Text)", stateLog);
         
-        // Add big.json file attachment
+        // Add video file attachment
         try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
+            InputStream videoStream = getClass().getClassLoader().getResourceAsStream("file_example.mp4");
+            if (videoStream != null) {
+                Allure.attachment("Test Demo Video", videoStream);
             }
         } catch (Exception e) {
-            // If big.json file is not found, continue with test
+            // If video file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");

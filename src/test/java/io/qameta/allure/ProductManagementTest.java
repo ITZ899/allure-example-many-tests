@@ -80,16 +80,6 @@ public class ProductManagementTest {
         Allure.attachment("Product Data (CSV)", productData);
         Allure.attachment("Product Log (Text)", productLog);
         
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
-        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Add Product Test");
         steps.shouldSeeIssueWithTitle("Add Product Test");
@@ -126,16 +116,6 @@ public class ProductManagementTest {
         Allure.attachment("Edit Metrics (CSV)", editMetrics);
         Allure.attachment("Edit Timestamp", timestamp);
         
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
-        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Edit Product Test");
         steps.shouldSeeIssueWithTitle("Edit Product Test");
@@ -159,16 +139,6 @@ public class ProductManagementTest {
             // If video file is not found, continue with test
         }
         
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
-        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Delete Product Test");
         steps.closeIssueWithTitle("Delete Product Test");
@@ -190,16 +160,6 @@ public class ProductManagementTest {
             }
         } catch (Exception e) {
             // If video file is not found, continue with test
-        }
-        
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -230,16 +190,6 @@ public class ProductManagementTest {
             // If video file is not found, continue with test
         }
         
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
-        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Price Range: " + minPrice + "-" + maxPrice + " (" + priceRange + ")");
         steps.shouldSeeIssueWithTitle("Price Range: " + minPrice + "-" + maxPrice + " (" + priceRange + ")");
@@ -261,16 +211,6 @@ public class ProductManagementTest {
             }
         } catch (Exception e) {
             // If video file is not found, continue with test
-        }
-        
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -296,16 +236,6 @@ public class ProductManagementTest {
             // If video file is not found, continue with test
         }
         
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
-        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Check Stock Test");
         steps.shouldSeeIssueWithTitle("Check Stock Test");
@@ -327,16 +257,6 @@ public class ProductManagementTest {
             }
         } catch (Exception e) {
             // If video file is not found, continue with test
-        }
-        
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
@@ -362,16 +282,6 @@ public class ProductManagementTest {
             // If video file is not found, continue with test
         }
         
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
-        }
-        
         steps.openIssuesPage("testuser", "testrepo");
         steps.createIssueWithTitle("Image Validation: " + productName);
         steps.shouldSeeIssueWithTitle("Image Validation: " + productName);
@@ -393,16 +303,6 @@ public class ProductManagementTest {
             }
         } catch (Exception e) {
             // If video file is not found, continue with test
-        }
-        
-        // Add big.json file attachment
-        try {
-            InputStream bigJsonStream = getClass().getClassLoader().getResourceAsStream("big.json");
-            if (bigJsonStream != null) {
-                Allure.attachment("Big JSON Data", bigJsonStream);
-            }
-        } catch (Exception e) {
-            // If big.json file is not found, continue with test
         }
         
         steps.openIssuesPage("testuser", "testrepo");
